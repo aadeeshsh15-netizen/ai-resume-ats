@@ -10,8 +10,9 @@ services:
   - type: web
     name: airesume-backend
     runtime: docker
-    dockerfilePath: backend/Dockerfile
-    dockerContext: backend
+    rootDir: backend
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
     plan: free
     region: oregon
     envVars:
