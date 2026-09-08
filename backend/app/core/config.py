@@ -7,8 +7,8 @@ class Settings(BaseSettings):
     PROJECT_NAME: str = "AI Resume Analyzer API"
     API_V1_STR: str = "/api"
     
-    # CORS: Supports comma-separated string or list in environment variables
-    BACKEND_CORS_ORIGINS: List[str] = [
+    # CORS: Supports JSON array string, comma-separated string, or list in environment variables
+    BACKEND_CORS_ORIGINS: Union[List[str], str] = [
         "http://localhost",
         "http://localhost:80",
         "http://localhost:3000",
@@ -24,10 +24,19 @@ class Settings(BaseSettings):
     @field_validator("BACKEND_CORS_ORIGINS", mode="before")
     @classmethod
     def assemble_cors_origins(cls, v: Union[str, List[str]]) -> List[str]:
-        if isinstance(v, str) and not v.startswith("["):
-            return [i.strip() for i in v.split(",") if i.strip()]
-        elif isinstance(v, (list, str)):
-            return v
+        if isinstance(v, str):
+            v_clean = v.strip()
+            if v_clean.startswith("[") and v_clean.endswith("]"):
+                import json
+                try:
+                    parsed = json.loads(v_clean)
+                    if isinstance(parsed, list):
+                        return [str(i).strip() for i in parsed if str(i).strip()]
+                except Exception:
+                    pass
+            return [i.strip() for i in v_clean.split(",") if i.strip()]
+        elif isinstance(v, list):
+            return [str(i).strip() for i in v if str(i).strip()]
         return []
 
     model_config = SettingsConfigDict(
