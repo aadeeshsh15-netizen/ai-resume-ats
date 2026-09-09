@@ -40,34 +40,34 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-[calc(100vh-140px)] px-4 py-12 relative overflow-hidden">
+    <div className="flex items-center justify-center min-h-[calc(100vh-140px)] px-4 py-12 relative overflow-hidden text-slate-100">
       {/* Ambient background glows */}
-      <div className="absolute top-1/4 left-1/3 -z-10 w-96 h-96 bg-indigo-300/20 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/3 -z-10 w-96 h-96 bg-cyan-300/20 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/4 left-1/3 -z-10 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/3 -z-10 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="w-full max-w-md bg-white/95 backdrop-blur-xl p-8 sm:p-10 rounded-3xl shadow-xl border border-slate-200/90 relative">
+      <div className="w-full max-w-md bg-[#090d1a]/90 backdrop-blur-2xl p-8 sm:p-10 rounded-3xl shadow-2xl border border-white/10 relative">
         {/* Brand header */}
         <div className="text-center mb-8 space-y-2">
-          <div className="inline-flex h-12 w-12 rounded-2xl bg-gradient-to-tr from-indigo-600 to-violet-600 items-center justify-center text-white shadow-md shadow-indigo-500/25 mb-2">
+          <div className="inline-flex h-12 w-12 rounded-2xl bg-gradient-to-tr from-cyan-500 to-blue-600 items-center justify-center text-slate-950 shadow-lg shadow-cyan-500/20 mb-2 font-bold">
             <Sparkles className="h-6 w-6" />
           </div>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
             Welcome Back
           </h2>
-          <p className="text-xs sm:text-sm text-slate-500">
+          <p className="text-xs sm:text-sm text-slate-400">
             Sign in to access your saved resume evaluations
           </p>
         </div>
 
         {error && (
-          <div className="bg-rose-50 border border-rose-200 text-rose-700 p-3.5 rounded-xl mb-6 text-xs font-medium leading-relaxed">
+          <div className="bg-rose-500/10 border border-rose-500/30 text-rose-300 p-3.5 rounded-xl mb-6 text-xs font-medium leading-relaxed">
             {error}
           </div>
         )}
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+            <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">
               Email Address
             </label>
             <div className="relative">
@@ -85,7 +85,7 @@ export default function LoginPage() {
 
           <div>
             <div className="flex items-center justify-between mb-1.5">
-              <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">
+              <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider">
                 Password
               </label>
             </div>
@@ -102,7 +102,7 @@ export default function LoginPage() {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none"
+                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-200 focus:outline-none"
               >
                 {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
               </button>
@@ -111,17 +111,17 @@ export default function LoginPage() {
 
           <Button 
             type="submit" 
-            className="w-full h-11 font-bold text-sm shadow-md shadow-indigo-500/25 hover:shadow-indigo-500/35 mt-2" 
+            className="w-full h-11 font-bold text-sm shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 mt-2" 
             disabled={loading}
           >
             {loading ? "Signing in..." : "Sign In to Account"}
           </Button>
         </form>
 
-        <div className="mt-8 pt-6 border-t border-slate-100 text-center">
-          <p className="text-xs text-slate-500">
+        <div className="mt-8 pt-6 border-t border-white/10 text-center">
+          <p className="text-xs text-slate-400">
             Don't have an account yet?{" "}
-            <Link to="/register" className="text-indigo-600 font-bold hover:underline">
+            <Link to="/register" className="text-cyan-400 font-bold hover:underline">
               Create free account
             </Link>
           </p>

@@ -8,23 +8,23 @@ const badgeVariants = cva(
     variants: {
       variant: {
         default:
-          "border-indigo-200/80 bg-indigo-50/90 text-indigo-700 hover:bg-indigo-100",
+          "border-cyan-500/30 bg-cyan-500/10 text-cyan-300 hover:bg-cyan-500/20",
         secondary:
-          "border-slate-200 bg-slate-100 text-slate-700 hover:bg-slate-200/80",
+          "border-white/10 bg-white/5 text-slate-300 hover:bg-white/10",
         destructive:
-          "border-rose-200 bg-rose-50 text-rose-700 hover:bg-rose-100",
+          "border-rose-500/30 bg-rose-500/10 text-rose-300 hover:bg-rose-500/20",
         outline:
-          "border-slate-200 bg-white/80 text-slate-700 hover:bg-slate-50",
+          "border-white/15 bg-slate-900/50 text-slate-300 hover:bg-white/5",
         success:
-          "border-emerald-200/90 bg-emerald-50 text-emerald-700 hover:bg-emerald-100",
+          "border-emerald-500/30 bg-emerald-500/10 text-emerald-300 hover:bg-emerald-500/20",
         warning:
-          "border-amber-200/90 bg-amber-50 text-amber-700 hover:bg-amber-100",
+          "border-amber-500/30 bg-amber-500/10 text-amber-300 hover:bg-amber-500/20",
         purple:
-          "border-purple-200/90 bg-purple-50 text-purple-700 hover:bg-purple-100",
+          "border-purple-500/30 bg-purple-500/10 text-purple-300 hover:bg-purple-500/20",
         cyan:
-          "border-cyan-200/90 bg-cyan-50 text-cyan-700 hover:bg-cyan-100",
+          "border-cyan-500/40 bg-cyan-500/15 text-cyan-200 hover:bg-cyan-500/25",
         gradient:
-          "border-indigo-300/40 bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 text-indigo-700",
+          "border-cyan-500/30 bg-gradient-to-r from-cyan-500/15 via-indigo-500/15 to-purple-500/15 text-cyan-200",
       },
     },
     defaultVariants: {

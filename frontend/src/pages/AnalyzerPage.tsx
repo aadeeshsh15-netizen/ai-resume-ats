@@ -212,17 +212,17 @@ export default function AnalyzerPage() {
   const isJdTooShort = jobDescription.trim().length > 0 && jobDescription.trim().length < 50
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 py-10 max-w-6xl">
+    <div className="container mx-auto px-4 sm:px-6 py-10 max-w-6xl text-slate-100">
       {/* Page Header */}
       <div className="mb-10 text-center sm:text-left space-y-2">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-200/80 text-xs font-bold text-indigo-700">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-xs font-bold text-cyan-300">
           <Sparkles className="w-3.5 h-3.5" />
           <span>Real-Time ATS Diagnostic</span>
         </div>
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
           Analyze your resume
         </h1>
-        <p className="text-slate-600 text-base max-w-2xl">
+        <p className="text-slate-400 text-base max-w-2xl">
           Compare your resume with the job you're targeting. Receive instant compatibility scores, missing keyword alerts, and AI-powered recommendations.
         </p>
       </div>
@@ -230,11 +230,11 @@ export default function AnalyzerPage() {
       {/* Two Column Grid */}
       <div className="grid md:grid-cols-2 gap-8 items-stretch">
         {/* Step 1: Resume Upload Card */}
-        <Card className={`flex flex-col border-slate-200/90 shadow-sm hover:shadow-md transition-shadow ${!file && uploadError?.includes("resume") ? "border-rose-300 ring-2 ring-rose-200/60" : ""}`}>
+        <Card className={`flex flex-col border-white/10 shadow-xl bg-[#090d1a]/90 backdrop-blur-2xl transition-all ${!file && uploadError?.includes("resume") ? "border-rose-500/50 ring-2 ring-rose-500/20" : ""}`}>
           <CardHeader className="pb-4">
             <div className="flex items-center justify-between">
-              <CardTitle className="flex items-center gap-3 text-lg sm:text-xl font-bold">
-                <span className="bg-gradient-to-tr from-indigo-600 to-violet-600 text-white w-7 h-7 rounded-lg flex items-center justify-center text-xs font-black shadow-xs">
+              <CardTitle className="flex items-center gap-3 text-lg sm:text-xl font-bold text-white">
+                <span className="bg-gradient-to-tr from-cyan-500 to-blue-600 text-slate-950 w-7 h-7 rounded-lg flex items-center justify-center text-xs font-black shadow-sm shadow-cyan-500/30">
                   1
                 </span>
                 Upload Resume
@@ -243,7 +243,7 @@ export default function AnalyzerPage() {
                 PDF or DOCX
               </Badge>
             </div>
-            <CardDescription className="text-xs text-slate-500">
+            <CardDescription className="text-xs text-slate-400">
               Maximum file size: 5MB. Clean text-based resumes yield best accuracy.
             </CardDescription>
           </CardHeader>
@@ -251,23 +251,23 @@ export default function AnalyzerPage() {
           <CardContent className="flex-1 flex flex-col justify-center">
             {!file ? (
               <div 
-                className={`border-2 border-dashed rounded-2xl p-8 text-center transition-all duration-200 flex flex-col items-center justify-center min-h-[240px] cursor-pointer ${
+                className={`border-2 border-dashed rounded-2xl p-8 text-center transition-all duration-300 flex flex-col items-center justify-center min-h-[240px] cursor-pointer ${
                   isDragging 
-                    ? "border-indigo-500 bg-indigo-50/70 scale-[0.99]" 
-                    : "border-slate-300/90 hover:border-indigo-400 bg-slate-50/70 hover:bg-white"
+                    ? "border-cyan-400 bg-cyan-500/10 scale-[0.99] glow-cyan" 
+                    : "border-white/15 hover:border-cyan-500/50 bg-slate-900/40 hover:bg-slate-900/70"
                 }`}
                 onDragOver={handleDragOver}
                 onDragLeave={handleDragLeave}
                 onDrop={handleDrop}
                 onClick={() => document.getElementById('resume-file-input')?.click()}
               >
-                <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center shadow-md shadow-slate-200/60 mb-4 border border-slate-100 text-indigo-600 group-hover:scale-110 transition-transform">
+                <div className="w-14 h-14 bg-slate-900 border border-white/10 rounded-2xl flex items-center justify-center shadow-lg shadow-black/40 mb-4 text-cyan-400 group-hover:scale-110 transition-transform">
                   <Upload className="h-7 w-7" />
                 </div>
-                <h3 className="text-base font-bold text-slate-900 mb-1">
+                <h3 className="text-base font-bold text-white mb-1">
                   Drag & drop your resume here
                 </h3>
-                <p className="text-xs text-slate-500 mb-4">
+                <p className="text-xs text-slate-400 mb-4">
                   Supports PDF or Word documents (.docx) up to 5MB
                 </p>
                 <Button 
@@ -287,21 +287,21 @@ export default function AnalyzerPage() {
                 />
               </div>
             ) : (
-              <div className="rounded-2xl p-5 border border-emerald-200/90 bg-emerald-50/40 shadow-xs flex items-center justify-between gap-4">
+              <div className="rounded-2xl p-5 border border-emerald-500/30 bg-emerald-500/10 shadow-sm flex items-center justify-between gap-4">
                 <div className="flex items-center gap-3.5 min-w-0">
-                  <div className="bg-emerald-600 text-white p-3 rounded-xl shadow-xs shrink-0">
+                  <div className="bg-emerald-500 text-slate-950 p-3 rounded-xl shadow-xs shrink-0 font-black">
                     <FileCheck2 className="h-6 w-6" />
                   </div>
                   <div className="min-w-0">
                     <div className="flex items-center gap-2">
-                      <h4 className="text-sm font-bold text-slate-900 truncate">
+                      <h4 className="text-sm font-bold text-white truncate">
                         {file.name}
                       </h4>
                       <Badge variant="success" className="text-[10px] py-0 px-2 font-bold shrink-0">
                         Ready
                       </Badge>
                     </div>
-                    <p className="text-xs text-slate-500 mt-0.5 font-medium">
+                    <p className="text-xs text-slate-400 mt-0.5 font-medium">
                       {(file.size / 1024 / 1024).toFixed(2)} MB • {file.name.endsWith('.pdf') ? 'PDF Document' : 'DOCX Document'}
                     </p>
                   </div>
@@ -314,7 +314,7 @@ export default function AnalyzerPage() {
                     setFile(null)
                     setUploadError(null)
                   }} 
-                  className="text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-xl"
+                  className="text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 rounded-xl"
                   title="Remove file"
                 >
                   <X className="h-4 w-4" />
@@ -325,21 +325,21 @@ export default function AnalyzerPage() {
         </Card>
 
         {/* Step 2: Job Description Card */}
-        <Card className={`flex flex-col border-slate-200/90 shadow-sm hover:shadow-md transition-shadow ${isJdTooShort ? "border-amber-300 ring-2 ring-amber-200/60" : ""}`}>
+        <Card className={`flex flex-col border-white/10 shadow-xl bg-[#090d1a]/90 backdrop-blur-2xl transition-all ${isJdTooShort ? "border-amber-500/40 ring-2 ring-amber-500/20" : ""}`}>
           <CardHeader className="pb-4">
             <div className="flex items-center justify-between">
-              <CardTitle className="flex items-center gap-3 text-lg sm:text-xl font-bold">
-                <span className="bg-gradient-to-tr from-violet-600 to-purple-600 text-white w-7 h-7 rounded-lg flex items-center justify-center text-xs font-black shadow-xs">
+              <CardTitle className="flex items-center gap-3 text-lg sm:text-xl font-bold text-white">
+                <span className="bg-gradient-to-tr from-purple-600 to-indigo-600 text-white w-7 h-7 rounded-lg flex items-center justify-center text-xs font-black shadow-sm shadow-purple-500/30">
                   2
                 </span>
                 Job Description
               </CardTitle>
-              <div className="flex items-center gap-1.5 text-xs text-slate-500 font-medium">
+              <div className="flex items-center gap-1.5 text-xs text-slate-400 font-medium">
                 <span>Quick sample:</span>
                 <button 
                   type="button" 
                   onClick={() => loadSample('frontend')}
-                  className="text-indigo-600 hover:underline font-bold text-xs cursor-pointer"
+                  className="text-cyan-400 hover:underline font-bold text-xs cursor-pointer"
                 >
                   Frontend
                 </button>
@@ -347,13 +347,13 @@ export default function AnalyzerPage() {
                 <button 
                   type="button" 
                   onClick={() => loadSample('fullstack')}
-                  className="text-violet-600 hover:underline font-bold text-xs cursor-pointer"
+                  className="text-purple-400 hover:underline font-bold text-xs cursor-pointer"
                 >
                   Full Stack
                 </button>
               </div>
             </div>
-            <CardDescription className="text-xs text-slate-500">
+            <CardDescription className="text-xs text-slate-400">
               Paste the complete target job description (minimum 50 characters required).
             </CardDescription>
           </CardHeader>
@@ -361,7 +361,7 @@ export default function AnalyzerPage() {
           <CardContent className="flex-1 flex flex-col">
             <Textarea 
               placeholder="Paste target job requirements, responsibilities, and required competencies here..." 
-              className={`flex-1 resize-none min-h-[200px] text-xs sm:text-sm font-normal ${isJdTooShort ? "border-amber-300 focus-visible:border-amber-500 focus-visible:ring-amber-500/20" : ""}`}
+              className={`flex-1 resize-none min-h-[200px] text-xs sm:text-sm font-normal ${isJdTooShort ? "border-amber-500/40 focus-visible:border-amber-500 focus-visible:ring-amber-500/20" : ""}`}
               value={jobDescription}
               onChange={(e) => {
                 setJobDescription(e.target.value)
@@ -374,16 +374,16 @@ export default function AnalyzerPage() {
             <div className="flex items-center justify-between text-xs mt-2.5 px-1 font-medium">
               <div>
                 {isJdTooShort ? (
-                  <span className="text-amber-600 font-semibold flex items-center gap-1">
+                  <span className="text-amber-400 font-semibold flex items-center gap-1">
                     <Info className="h-3.5 w-3.5" /> Need {50 - jobDescription.trim().length} more characters
                   </span>
                 ) : (
-                  <span className="text-slate-400">
+                  <span className="text-slate-500">
                     {jobDescription.trim().split(/\s+/).filter(Boolean).length} words
                   </span>
                 )}
               </div>
-              <span className={jobDescription.trim().length >= 50 ? "text-emerald-600 font-semibold" : "text-slate-400"}>
+              <span className={jobDescription.trim().length >= 50 ? "text-emerald-400 font-semibold" : "text-slate-500"}>
                 {jobDescription.trim().length} / 50 min chars
               </span>
             </div>
@@ -393,16 +393,16 @@ export default function AnalyzerPage() {
 
       {/* Global Error Banner */}
       {uploadError && (
-        <div className="mt-6 p-4 bg-rose-50/90 border border-rose-200 rounded-2xl flex items-start gap-3 text-rose-800 text-xs sm:text-sm font-medium shadow-xs animate-in fade-in-50 duration-200">
-          <AlertCircle className="h-5 w-5 shrink-0 mt-0.5 text-rose-600" />
+        <div className="mt-6 p-4 bg-rose-500/10 border border-rose-500/30 rounded-2xl flex items-start gap-3 text-rose-300 text-xs sm:text-sm font-medium shadow-lg animate-in fade-in-50 duration-200">
+          <AlertCircle className="h-5 w-5 shrink-0 mt-0.5 text-rose-400" />
           <div className="flex-1 leading-relaxed">
-            <span className="font-bold text-rose-900 block mb-0.5">Analysis Request Error</span>
+            <span className="font-bold text-rose-200 block mb-0.5">Analysis Request Error</span>
             {uploadError}
           </div>
           <button 
             type="button" 
             onClick={() => setUploadError(null)} 
-            className="text-rose-400 hover:text-rose-700 p-1 rounded-lg"
+            className="text-rose-400 hover:text-rose-200 p-1 rounded-lg"
           >
             <X className="h-4 w-4" />
           </button>
@@ -410,14 +410,14 @@ export default function AnalyzerPage() {
       )}
 
       {/* Bottom Action Bar */}
-      <div className="mt-8 rounded-2xl bg-white border border-slate-200/90 p-5 sm:p-6 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div className="flex items-center gap-3 text-sm text-slate-600 text-center sm:text-left">
-          <div className="h-10 w-10 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 shrink-0 shadow-2xs">
+      <div className="mt-8 rounded-2xl bg-[#090d1a]/90 border border-white/10 p-5 sm:p-6 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-4 backdrop-blur-2xl">
+        <div className="flex items-center gap-3 text-sm text-slate-300 text-center sm:text-left">
+          <div className="h-10 w-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-300 shrink-0 shadow-sm">
             <Briefcase className="h-5 w-5" />
           </div>
           <div>
-            <p className="font-bold text-slate-800">Ready to evaluate your match?</p>
-            <p className="text-xs text-slate-500">
+            <p className="font-bold text-white">Ready to evaluate your match?</p>
+            <p className="text-xs text-slate-400">
               {isAnalyzing 
                 ? LOADING_STEPS[loadingStepIndex] 
                 : "Deterministic scoring & semantic analysis run locally in real-time."
@@ -433,18 +433,18 @@ export default function AnalyzerPage() {
             disabled={isAnalyzing} 
             className="w-full sm:w-auto font-bold"
           >
-            <Play className="w-4 h-4 mr-2 text-indigo-600" />
+            <Play className="w-4 h-4 mr-2 text-cyan-400" />
             Try with Demo Data
           </Button>
 
           <Button 
             onClick={handleAnalyze} 
             disabled={isAnalyzing}
-            className="w-full sm:w-auto min-w-[220px] font-bold shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/35"
+            className="w-full sm:w-auto min-w-[220px] font-bold shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40"
           >
             {isAnalyzing ? (
               <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                <Loader2 className="mr-2 h-4 w-4 animate-spin text-cyan-300" />
                 <span>{LOADING_STEPS[loadingStepIndex]}</span>
               </>
             ) : (

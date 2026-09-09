@@ -86,21 +86,21 @@ export default function HistoryPage() {
 
   if (!token) {
     return (
-      <div className="container mx-auto px-4 sm:px-6 py-16 max-w-4xl min-h-[75vh] flex flex-col justify-center items-center text-center">
-        <div className="w-16 h-16 rounded-2xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 mb-6 shadow-sm">
+      <div className="container mx-auto px-4 sm:px-6 py-16 max-w-4xl min-h-[75vh] flex flex-col justify-center items-center text-center text-slate-100">
+        <div className="w-16 h-16 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-300 mb-6 shadow-lg shadow-cyan-500/10">
           <Clock className="w-8 h-8" />
         </div>
-        <Badge variant="default" className="mb-3 font-bold">
-          ACCOUNT REQUIRED
+        <Badge variant="cyan" className="mb-3 font-bold uppercase tracking-wider">
+          Account Required
         </Badge>
-        <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight mb-3">
+        <h1 className="text-3xl font-extrabold text-white tracking-tight mb-3">
           Analysis History & Cloud Sync
         </h1>
-        <p className="text-slate-600 mb-8 max-w-md text-sm sm:text-base leading-relaxed">
-          Sign in to your free account to automatically save your resume analyses, track ATS compatibility over time, and access previous reports.
+        <p className="text-slate-400 mb-8 max-w-md text-sm sm:text-base leading-relaxed">
+          Sign in to your account to automatically save your resume analyses, track ATS compatibility over time, and access previous reports.
         </p>
         <div className="flex gap-4">
-          <Button asChild size="lg" className="font-bold shadow-md shadow-indigo-500/25">
+          <Button asChild size="lg" className="font-bold shadow-lg shadow-cyan-500/25">
             <Link to="/login">Sign In to View History</Link>
           </Button>
           <Button asChild variant="outline" size="lg" className="font-bold">
@@ -112,24 +112,24 @@ export default function HistoryPage() {
   }
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 py-10 max-w-5xl">
+    <div className="container mx-auto px-4 sm:px-6 py-10 max-w-5xl text-slate-100">
       {/* Top Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
         <div>
           <div className="flex items-center gap-2">
-            <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">
+            <h1 className="text-3xl font-extrabold text-white tracking-tight">
               Analysis History
             </h1>
             <Badge variant="secondary" className="font-bold text-xs">
               {analyses.length} {analyses.length === 1 ? 'Scan' : 'Scans'}
             </Badge>
           </div>
-          <p className="text-slate-500 text-sm mt-1">
+          <p className="text-slate-400 text-sm mt-1">
             Access, review, and manage your previous resume compatibility scans.
           </p>
         </div>
 
-        <Button asChild className="font-bold self-start md:self-auto shadow-md shadow-indigo-500/20">
+        <Button asChild className="font-bold self-start md:self-auto shadow-lg shadow-cyan-500/20">
           <Link to="/analyze" className="gap-2">
             <Plus className="w-4 h-4" />
             New Analysis
@@ -146,48 +146,52 @@ export default function HistoryPage() {
             placeholder="Search by job title or role keyword..." 
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-10 h-11 bg-white"
+            className="pl-10 h-11"
           />
         </div>
       )}
 
       {/* Content State */}
       {loading ? (
-        <div className="flex flex-col items-center justify-center p-16 space-y-3">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600" />
-          <p className="text-sm font-semibold text-slate-500">Loading analysis records...</p>
+        <div className="flex flex-col items-center justify-center p-16 space-y-3 text-slate-400">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-cyan-400" />
+          <p className="text-sm font-semibold">Loading analysis records...</p>
         </div>
       ) : error ? (
-        <div className="bg-rose-50 border border-rose-200 text-rose-700 p-4 rounded-2xl text-sm font-medium">
+        <div className="bg-rose-500/10 border border-rose-500/30 text-rose-300 p-4 rounded-2xl text-sm font-medium">
           {error}
         </div>
       ) : analyses.length === 0 ? (
-        <div className="bg-white border-2 border-dashed border-slate-200/90 rounded-3xl p-12 sm:p-16 text-center max-w-lg mx-auto shadow-xs">
-          <div className="h-16 w-16 rounded-2xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 mx-auto mb-5 shadow-2xs">
+        <div className="bg-[#090d1a]/90 border-2 border-dashed border-white/10 rounded-3xl p-12 sm:p-16 text-center max-w-lg mx-auto shadow-2xl backdrop-blur-2xl">
+          <div className="h-16 w-16 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-300 mx-auto mb-5 shadow-lg shadow-cyan-500/20">
             <Sparkles className="w-8 h-8" />
           </div>
-          <h3 className="text-lg font-bold text-slate-900 mb-1.5">No analyses recorded yet</h3>
-          <p className="text-xs sm:text-sm text-slate-500 mb-6 leading-relaxed">
+          <h3 className="text-lg font-bold text-white mb-1.5">No analyses recorded yet</h3>
+          <p className="text-xs sm:text-sm text-slate-400 mb-6 leading-relaxed">
             Run your first resume scan against a job description to start building your career improvement history.
           </p>
-          <Button asChild size="lg" className="font-bold shadow-md shadow-indigo-500/25">
+          <Button asChild size="lg" className="font-bold shadow-lg shadow-cyan-500/25">
             <Link to="/analyze">Run First Analysis <ArrowRight className="w-4 h-4 ml-1.5" /></Link>
           </Button>
         </div>
       ) : filteredAnalyses.length === 0 ? (
-        <div className="bg-white rounded-2xl p-10 text-center border border-slate-200 text-slate-500 text-sm">
-          No records matching <span className="font-bold text-slate-800">"{searchQuery}"</span>.
+        <div className="bg-slate-900/60 rounded-2xl p-10 text-center border border-white/10 text-slate-400 text-sm">
+          No records matching <span className="font-bold text-slate-200">"{searchQuery}"</span>.
         </div>
       ) : (
         <div className="space-y-3.5">
           {filteredAnalyses.map((analysis) => {
             const score = analysis.overall_score || 0
-            const scoreColor = score >= 80 ? "text-emerald-600 bg-emerald-50 border-emerald-200" : score >= 60 ? "text-amber-600 bg-amber-50 border-amber-200" : "text-rose-600 bg-rose-50 border-rose-200"
+            const scoreColor = score >= 80 
+              ? "text-emerald-300 bg-emerald-500/10 border-emerald-500/30" 
+              : score >= 60 
+              ? "text-cyan-300 bg-cyan-500/10 border-cyan-500/30" 
+              : "text-rose-300 bg-rose-500/10 border-rose-500/30"
             
             return (
               <Card 
                 key={analysis.id} 
-                className="overflow-hidden hover:shadow-md hover:border-slate-300 transition-all cursor-pointer group"
+                className="overflow-hidden hover:border-cyan-500/50 hover:shadow-xl hover:shadow-cyan-500/10 transition-all cursor-pointer group bg-[#090d1a]/90 backdrop-blur-2xl border-white/10"
                 onClick={() => handleOpen(analysis.id)}
               >
                 <CardContent className="p-0">
@@ -195,22 +199,22 @@ export default function HistoryPage() {
                     
                     {/* Left details */}
                     <div className="flex items-center gap-4 min-w-0">
-                      <div className={`h-13 w-13 rounded-2xl border flex flex-col items-center justify-center shrink-0 font-black shadow-2xs ${scoreColor}`}>
+                      <div className={`h-13 w-13 rounded-2xl border flex flex-col items-center justify-center shrink-0 font-black shadow-inner ${scoreColor}`}>
                         <span className="text-lg leading-none">{score}</span>
                         <span className="text-[9px] uppercase tracking-tighter opacity-80 mt-0.5">Score</span>
                       </div>
 
                       <div className="min-w-0">
-                        <h3 className="font-bold text-base text-slate-900 group-hover:text-indigo-600 transition-colors truncate">
+                        <h3 className="font-bold text-base text-slate-100 group-hover:text-cyan-300 transition-colors truncate">
                           {analysis.job_title || "Unknown Position"}
                         </h3>
                         <div className="flex items-center gap-3 mt-1 text-xs text-slate-400 font-medium">
                           <span className="flex items-center gap-1">
-                            <Calendar className="w-3.5 h-3.5 text-slate-400" />
+                            <Calendar className="w-3.5 h-3.5 text-slate-500" />
                             {new Date(analysis.created_at).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}
                           </span>
                           <span>•</span>
-                          <span className="text-emerald-600 font-semibold flex items-center gap-0.5">
+                          <span className="text-emerald-400 font-semibold flex items-center gap-0.5">
                             <ShieldCheck className="w-3.5 h-3.5" /> Full Audit Saved
                           </span>
                         </div>
@@ -218,11 +222,11 @@ export default function HistoryPage() {
                     </div>
                     
                     {/* Right actions */}
-                    <div className="flex items-center gap-2 sm:border-l sm:border-slate-100 sm:pl-6 shrink-0 justify-end">
+                    <div className="flex items-center gap-2 sm:border-l sm:border-white/10 sm:pl-6 shrink-0 justify-end">
                       <Button 
                         variant="ghost" 
                         size="icon" 
-                        className="text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-xl" 
+                        className="text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 rounded-xl" 
                         onClick={(e) => handleDelete(analysis.id, e)}
                         title="Delete record"
                       >
@@ -231,7 +235,7 @@ export default function HistoryPage() {
                       <Button 
                         variant="secondary" 
                         size="sm"
-                        className="font-bold rounded-xl text-xs group-hover:bg-indigo-600 group-hover:text-white transition-colors"
+                        className="font-bold rounded-xl text-xs group-hover:bg-cyan-500 group-hover:text-slate-950 transition-colors"
                       >
                         View Report
                         <ArrowRight className="w-3.5 h-3.5 ml-1.5" />

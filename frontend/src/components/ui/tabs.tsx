@@ -57,7 +57,7 @@ const TabsList = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "inline-flex items-center justify-start rounded-xl bg-slate-100/90 p-1.5 text-slate-500 border border-slate-200/80 shadow-inner backdrop-blur-sm gap-1",
+      "inline-flex items-center justify-start rounded-xl bg-slate-900/80 p-1.5 text-slate-400 border border-white/10 shadow-inner backdrop-blur-xl gap-1 overflow-x-auto max-w-full",
       className
     )}
     {...props}
@@ -82,10 +82,10 @@ const TabsTrigger = React.forwardRef<HTMLButtonElement, TabsTriggerProps>(
         aria-selected={isSelected}
         onClick={() => onValueChange(value)}
         className={cn(
-          "inline-flex items-center justify-center whitespace-nowrap rounded-lg px-3.5 py-2 text-xs md:text-sm font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 disabled:pointer-events-none disabled:opacity-50 cursor-pointer",
+          "inline-flex items-center justify-center whitespace-nowrap rounded-lg px-3.5 py-2 text-xs md:text-sm font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 disabled:pointer-events-none disabled:opacity-50 cursor-pointer",
           isSelected
-            ? "bg-white text-indigo-600 shadow-sm border border-slate-200/60 font-bold"
-            : "text-slate-600 hover:text-slate-900 hover:bg-white/60",
+            ? "bg-cyan-500/15 text-cyan-300 shadow-md border border-cyan-500/30 font-bold glow-cyan"
+            : "text-slate-400 hover:text-slate-200 hover:bg-white/5",
           className
         )}
         {...props}

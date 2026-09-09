@@ -328,9 +328,9 @@ export default function ResultsPage() {
   }
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 py-8 max-w-7xl">
+    <div className="container mx-auto px-4 sm:px-6 py-8 max-w-7xl text-slate-100">
       {/* Top Navigation & Role Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-6 shadow-xs">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 bg-[#090d1a]/80 border border-white/10 rounded-2xl p-4 sm:p-6 backdrop-blur-xl shadow-xl">
         <div className="flex items-center gap-4">
           <Button variant="outline" size="icon" asChild className="rounded-xl shrink-0">
             <Link to="/analyze" title="Back to Analyzer">
@@ -338,16 +338,16 @@ export default function ResultsPage() {
             </Link>
           </Button>
           <div>
-            <div className="flex items-center gap-2 flex-wrap">
-              <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
+            <div className="flex items-center gap-2.5 flex-wrap">
+              <h1 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight">
                 Resume Diagnostic Report
               </h1>
-              <Badge variant="default" className="text-xs font-bold bg-indigo-50 text-indigo-700 border-indigo-200">
+              <Badge variant="cyan" className="text-xs font-bold">
                 Evaluation Complete
               </Badge>
             </div>
-            <p className="text-xs sm:text-sm text-slate-500 mt-0.5 font-medium">
-              Target Role: <span className="font-bold text-slate-800">{matchData.job_description_data?.job_title || "Target Position"}</span>
+            <p className="text-xs sm:text-sm text-slate-400 mt-0.5 font-medium">
+              Target Role: <span className="font-bold text-cyan-300">{matchData.job_description_data?.job_title || "Target Position"}</span>
             </p>
           </div>
         </div>
@@ -359,7 +359,7 @@ export default function ResultsPage() {
             onClick={() => window.print()}
             className="font-semibold text-xs"
           >
-            <Download className="mr-1.5 h-4 w-4 text-slate-500" /> Export PDF
+            <Download className="mr-1.5 h-4 w-4 text-slate-400" /> Export PDF
           </Button>
           <Button 
             variant="default" 
@@ -385,13 +385,13 @@ export default function ResultsPage() {
         {/* Left Column: Overall Score Card & Radar Chart (4 cols) */}
         <div className="lg:col-span-4 space-y-6">
           {/* Main Compatibility Score Card */}
-          <Card className="border-slate-200/90 shadow-md relative overflow-hidden bg-gradient-to-b from-white to-slate-50/50">
-            <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-500" />
+          <Card className="border-white/10 shadow-2xl relative overflow-hidden bg-[#090d1a]/90 backdrop-blur-2xl">
+            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 via-indigo-500 to-purple-500" />
             <CardHeader className="text-center pb-2">
-              <CardTitle className="text-lg font-bold text-slate-900">
+              <CardTitle className="text-lg font-bold text-white">
                 ATS Compatibility Score
               </CardTitle>
-              <CardDescription className="text-xs">
+              <CardDescription className="text-xs text-slate-400">
                 Calibrated multi-factor compatibility evaluation
               </CardDescription>
             </CardHeader>
@@ -399,19 +399,19 @@ export default function ResultsPage() {
               {/* Large Circular Gauge */}
               <div className="relative flex items-center justify-center w-44 h-44 my-2">
                 <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
-                  <circle cx="50" cy="50" r="42" fill="none" stroke="#f1f5f9" strokeWidth="9" />
+                  <circle cx="50" cy="50" r="42" fill="none" stroke="#1e293b" strokeWidth="9" />
                   <circle 
                     cx="50" cy="50" r="42" fill="none" 
-                    stroke={overallScore >= 75 ? "#10b981" : overallScore >= 60 ? "#6366f1" : overallScore >= 45 ? "#f59e0b" : "#ef4444"} 
+                    stroke={overallScore >= 75 ? "#10b981" : overallScore >= 60 ? "#06b6d4" : overallScore >= 45 ? "#f59e0b" : "#ef4444"} 
                     strokeWidth="9" 
                     strokeDasharray="263.89" 
                     strokeDashoffset={263.89 - (263.89 * overallScore) / 100} 
                     strokeLinecap="round" 
-                    className="transition-all duration-1000 ease-out"
+                    className="transition-all duration-1000 ease-out drop-shadow-[0_0_8px_rgba(6,182,212,0.4)]"
                   />
                 </svg>
                 <div className="absolute inset-0 flex flex-col items-center justify-center">
-                  <span className="text-4xl font-black text-slate-900 tracking-tight">
+                  <span className="text-4xl font-black text-white tracking-tight">
                     {overallScore}
                   </span>
                   <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">
@@ -423,8 +423,8 @@ export default function ResultsPage() {
               {/* Status Verdict Pill */}
               <div className="mt-2 text-center">
                 <Badge 
-                  variant={overallScore >= 75 ? "success" : overallScore >= 60 ? "default" : overallScore >= 45 ? "warning" : "destructive"}
-                  className="px-3.5 py-1 text-xs font-bold uppercase tracking-wider shadow-xs"
+                  variant={overallScore >= 75 ? "success" : overallScore >= 60 ? "cyan" : overallScore >= 45 ? "warning" : "destructive"}
+                  className="px-3.5 py-1 text-xs font-bold uppercase tracking-wider shadow-sm"
                 >
                   {scoreLabel}
                 </Badge>
@@ -432,57 +432,57 @@ export default function ResultsPage() {
 
               {/* Score Explanation Banner */}
               {matchData.explanation && (
-                <div className="mt-4 p-3 bg-slate-50 border border-slate-200/80 rounded-xl text-left">
-                  <p className="text-xs text-slate-600 leading-relaxed font-medium">
+                <div className="mt-4 p-3 bg-slate-900/80 border border-white/10 rounded-xl text-left">
+                  <p className="text-xs text-slate-300 leading-relaxed font-medium">
                     {matchData.explanation}
                   </p>
                 </div>
               )}
 
               {/* 6-Factor Score Breakdown */}
-              <div className="w-full grid grid-cols-3 gap-2 mt-5 pt-5 border-t border-slate-100 text-center">
-                <div className="bg-white border border-slate-200/70 rounded-xl p-2 shadow-2xs">
-                  <div className="text-sm font-extrabold text-indigo-600">
+              <div className="w-full grid grid-cols-3 gap-2 mt-5 pt-5 border-t border-white/10 text-center">
+                <div className="bg-slate-900/60 border border-white/5 rounded-xl p-2 shadow-inner">
+                  <div className="text-sm font-extrabold text-cyan-400">
                     {scoreBreakdown.required_skills}%
                   </div>
                   <div className="text-[9px] font-bold text-slate-400 uppercase leading-tight mt-0.5">
                     Req. Skills (40%)
                   </div>
                 </div>
-                <div className="bg-white border border-slate-200/70 rounded-xl p-2 shadow-2xs">
-                  <div className="text-sm font-extrabold text-cyan-600">
+                <div className="bg-slate-900/60 border border-white/5 rounded-xl p-2 shadow-inner">
+                  <div className="text-sm font-extrabold text-purple-400">
                     {scoreBreakdown.semantic_relevance}%
                   </div>
                   <div className="text-[9px] font-bold text-slate-400 uppercase leading-tight mt-0.5">
                     Semantic (25%)
                   </div>
                 </div>
-                <div className="bg-white border border-slate-200/70 rounded-xl p-2 shadow-2xs">
-                  <div className="text-sm font-extrabold text-violet-600">
+                <div className="bg-slate-900/60 border border-white/5 rounded-xl p-2 shadow-inner">
+                  <div className="text-sm font-extrabold text-indigo-400">
                     {scoreBreakdown.keywords}%
                   </div>
                   <div className="text-[9px] font-bold text-slate-400 uppercase leading-tight mt-0.5">
                     Keywords (15%)
                   </div>
                 </div>
-                <div className="bg-white border border-slate-200/70 rounded-xl p-2 shadow-2xs">
-                  <div className="text-sm font-extrabold text-emerald-600">
+                <div className="bg-slate-900/60 border border-white/5 rounded-xl p-2 shadow-inner">
+                  <div className="text-sm font-extrabold text-emerald-400">
                     {scoreBreakdown.experience_projects}%
                   </div>
                   <div className="text-[9px] font-bold text-slate-400 uppercase leading-tight mt-0.5">
                     Projects (10%)
                   </div>
                 </div>
-                <div className="bg-white border border-slate-200/70 rounded-xl p-2 shadow-2xs">
-                  <div className="text-sm font-extrabold text-amber-600">
+                <div className="bg-slate-900/60 border border-white/5 rounded-xl p-2 shadow-inner">
+                  <div className="text-sm font-extrabold text-amber-400">
                     {scoreBreakdown.education}%
                   </div>
                   <div className="text-[9px] font-bold text-slate-400 uppercase leading-tight mt-0.5">
                     Education (5%)
                   </div>
                 </div>
-                <div className="bg-white border border-slate-200/70 rounded-xl p-2 shadow-2xs">
-                  <div className="text-sm font-extrabold text-slate-700">
+                <div className="bg-slate-900/60 border border-white/5 rounded-xl p-2 shadow-inner">
+                  <div className="text-sm font-extrabold text-slate-300">
                     {scoreBreakdown.resume_quality}%
                   </div>
                   <div className="text-[9px] font-bold text-slate-400 uppercase leading-tight mt-0.5">
@@ -494,23 +494,23 @@ export default function ResultsPage() {
           </Card>
 
           {/* Radar Dimension Chart */}
-          <Card className="border-slate-200/90 shadow-sm">
+          <Card className="border-white/10 shadow-xl bg-[#090d1a]/90 backdrop-blur-2xl">
             <CardHeader className="pb-2">
-              <CardTitle className="text-base font-bold text-slate-900 flex items-center justify-between">
+              <CardTitle className="text-base font-bold text-white flex items-center justify-between">
                 <span>Dimensional Alignment</span>
-                <Layers className="w-4 h-4 text-indigo-500" />
+                <Layers className="w-4 h-4 text-cyan-400" />
               </CardTitle>
-              <CardDescription className="text-xs">
+              <CardDescription className="text-xs text-slate-400">
                 Multi-factor candidate competency distribution
               </CardDescription>
             </CardHeader>
             <CardContent className="h-64 pt-0">
               <ResponsiveContainer width="100%" height="100%">
                 <RadarChart cx="50%" cy="50%" outerRadius="68%" data={radarData}>
-                  <PolarGrid stroke="#e2e8f0" />
-                  <PolarAngleAxis dataKey="subject" tick={{ fill: '#64748b', fontSize: 10, fontWeight: 600 }} />
+                  <PolarGrid stroke="#334155" />
+                  <PolarAngleAxis dataKey="subject" tick={{ fill: '#94a3b8', fontSize: 10, fontWeight: 600 }} />
                   <PolarRadiusAxis angle={30} domain={[0, 100]} tick={false} axisLine={false} />
-                  <Radar name="Candidate Profile" dataKey="A" stroke="#6366f1" fill="#6366f1" fillOpacity={0.35} />
+                  <Radar name="Candidate Profile" dataKey="A" stroke="#06b6d4" fill="#06b6d4" fillOpacity={0.25} />
                 </RadarChart>
               </ResponsiveContainer>
             </CardContent>
@@ -521,7 +521,7 @@ export default function ResultsPage() {
         <div className="lg:col-span-8 space-y-6">
           <Tabs defaultValue="skills" className="w-full">
             {/* Navigation Tabs Bar */}
-            <TabsList className="grid grid-cols-3 sm:grid-cols-6 w-full p-1 bg-slate-100/90 rounded-2xl border border-slate-200/80 shadow-xs h-auto gap-1">
+            <TabsList className="grid grid-cols-3 sm:grid-cols-6 w-full p-1.5 bg-slate-900/80 rounded-2xl border border-white/10 shadow-inner backdrop-blur-xl h-auto gap-1">
               <TabsTrigger value="skills" className="py-2.5 text-xs font-bold rounded-xl flex items-center justify-center gap-1.5">
                 <Target className="w-3.5 h-3.5" />
                 <span>Skills</span>
@@ -550,23 +550,23 @@ export default function ResultsPage() {
 
             {/* TAB 1: SKILLS & REQUIREMENTS */}
             <TabsContent value="skills">
-              <Card className="border-slate-200/90 shadow-sm">
+              <Card className="border-white/10 shadow-xl bg-[#090d1a]/90 backdrop-blur-2xl">
                 <CardHeader>
                   <div className="flex items-center justify-between">
                     <div>
-                      <CardTitle className="text-xl font-bold text-slate-900">
+                      <CardTitle className="text-xl font-bold text-white">
                         Requirements & Skill Match
                       </CardTitle>
-                      <CardDescription className="text-xs">
+                      <CardDescription className="text-xs text-slate-400">
                         Deterministic matching of extracted competencies against job criteria
                       </CardDescription>
                     </div>
                     <div className="flex items-center gap-2 flex-wrap">
-                      <Badge variant="default" className="text-xs font-bold bg-indigo-50 text-indigo-700 border border-indigo-200 shadow-2xs">
+                      <Badge variant="cyan" className="text-xs font-bold">
                         Required Match: {skillMatch.required_match_percentage ?? scoreBreakdown.required_skills}%
                       </Badge>
                       {(skillMatch.matched_preferred?.length > 0 || skillMatch.missing_preferred?.length > 0) && (
-                        <Badge variant="secondary" className="text-xs font-bold bg-purple-50 text-purple-700 border border-purple-200 shadow-2xs">
+                        <Badge variant="purple" className="text-xs font-bold">
                           Preferred Match: {skillMatch.preferred_match_percentage ?? 0}%
                         </Badge>
                       )}
@@ -576,30 +576,30 @@ export default function ResultsPage() {
                 <CardContent className="space-y-6">
                   {/* Experience & Education Status Cards */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="p-4 rounded-xl border border-slate-200/80 bg-slate-50/60 flex items-center gap-3">
-                      <div className="bg-white p-2.5 rounded-lg shadow-2xs border border-slate-200/60">
-                        <Briefcase className="w-5 h-5 text-indigo-600" />
+                    <div className="p-4 rounded-xl border border-white/10 bg-slate-900/60 flex items-center gap-3">
+                      <div className="bg-cyan-500/10 p-2.5 rounded-lg border border-cyan-500/20">
+                        <Briefcase className="w-5 h-5 text-cyan-400" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-xs font-bold text-slate-500 uppercase">Experience Requirement</p>
+                        <p className="text-xs font-bold text-slate-400 uppercase">Experience Requirement</p>
                         <div className="flex items-center gap-1.5 mt-0.5">
                           {getStatusIcon(matchData.experience_match)}
-                          <span className="text-sm font-bold text-slate-900 truncate">
+                          <span className="text-sm font-bold text-slate-100 truncate">
                             {getStatusText(matchData.experience_match, 'experience')}
                           </span>
                         </div>
                       </div>
                     </div>
 
-                    <div className="p-4 rounded-xl border border-slate-200/80 bg-slate-50/60 flex items-center gap-3">
-                      <div className="bg-white p-2.5 rounded-lg shadow-2xs border border-slate-200/60">
-                        <GraduationCap className="w-5 h-5 text-violet-600" />
+                    <div className="p-4 rounded-xl border border-white/10 bg-slate-900/60 flex items-center gap-3">
+                      <div className="bg-purple-500/10 p-2.5 rounded-lg border border-purple-500/20">
+                        <GraduationCap className="w-5 h-5 text-purple-400" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-xs font-bold text-slate-500 uppercase">Education Requirement</p>
+                        <p className="text-xs font-bold text-slate-400 uppercase">Education Requirement</p>
                         <div className="flex items-center gap-1.5 mt-0.5">
                           {getStatusIcon(matchData.education_match)}
-                          <span className="text-sm font-bold text-slate-900 truncate">
+                          <span className="text-sm font-bold text-slate-100 truncate">
                             {getStatusText(matchData.education_match, 'education')}
                           </span>
                         </div>
@@ -609,8 +609,8 @@ export default function ResultsPage() {
 
                   {/* Required Skills Section */}
                   <div className="space-y-3 pt-2">
-                    <div className="flex items-center justify-between border-b border-slate-100 pb-2">
-                      <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
+                    <div className="flex items-center justify-between border-b border-white/10 pb-2">
+                      <h3 className="text-sm font-bold text-slate-200 flex items-center gap-2">
                         <span>Required Skills</span>
                         <Badge variant="secondary" className="text-[11px] font-bold">
                           {skillMatch.matched_required.length} / {skillMatch.matched_required.length + skillMatch.missing_required.length} Matched ({skillMatch.required_match_percentage ?? (skillMatch.matched_required.length > 0 ? Math.round((skillMatch.matched_required.length / (skillMatch.matched_required.length + skillMatch.missing_required.length)) * 100) : 0)}%)
@@ -620,33 +620,33 @@ export default function ResultsPage() {
 
                     <div className="space-y-3">
                       <div>
-                        <span className="text-xs font-bold text-emerald-700 flex items-center gap-1 mb-2">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" /> Matched Required Skills
+                        <span className="text-xs font-bold text-emerald-400 flex items-center gap-1 mb-2">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> Matched Required Skills
                         </span>
                         <div className="flex flex-wrap gap-2">
                           {skillMatch.matched_required.length > 0 ? (
                             skillMatch.matched_required.map((s: string) => (
-                              <Badge key={s} variant="success" className="font-semibold text-xs py-1 px-2.5 shadow-2xs">
+                              <Badge key={s} variant="success" className="font-semibold text-xs py-1 px-2.5">
                                 ✓ {s}
                               </Badge>
                             ))
                           ) : (
-                            <span className="text-xs text-slate-400 italic">No explicitly required skills matched.</span>
+                            <span className="text-xs text-slate-500 italic">No explicitly required skills matched.</span>
                           )}
                         </div>
                       </div>
 
                       {skillMatch.missing_required.length > 0 && (
-                        <div className="pt-2 bg-amber-50/50 p-3 rounded-xl border border-amber-200/60">
-                          <span className="text-xs font-bold text-amber-800 flex items-center gap-1 mb-1.5">
-                            <AlertCircle className="w-3.5 h-3.5 text-amber-600" /> Unmatched Job Requirements ({skillMatch.missing_required.length})
+                        <div className="pt-2 bg-amber-500/10 p-3.5 rounded-xl border border-amber-500/30">
+                          <span className="text-xs font-bold text-amber-300 flex items-center gap-1 mb-1.5">
+                            <AlertCircle className="w-3.5 h-3.5 text-amber-400" /> Unmatched Job Requirements ({skillMatch.missing_required.length})
                           </span>
-                          <p className="text-[11px] text-amber-700/90 mb-2 leading-relaxed">
+                          <p className="text-[11px] text-amber-200/80 mb-2 leading-relaxed">
                             These competencies are explicitly requested in the job description. If you possess this experience, consider incorporating them into your resume:
                           </p>
                           <div className="flex flex-wrap gap-2">
                             {skillMatch.missing_required.map((s: string) => (
-                              <Badge key={s} variant="outline" className="font-semibold text-xs py-1 px-2.5 bg-white border-amber-300 text-amber-900">
+                              <Badge key={s} variant="outline" className="font-semibold text-xs py-1 px-2.5 border-amber-500/40 text-amber-300 bg-amber-500/5">
                                 + {s}
                               </Badge>
                             ))}
@@ -658,38 +658,38 @@ export default function ResultsPage() {
 
                   {/* Preferred Skills Section */}
                   <div className="space-y-3 pt-2">
-                    <div className="flex items-center justify-between border-b border-slate-100 pb-2">
-                      <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
+                    <div className="flex items-center justify-between border-b border-white/10 pb-2">
+                      <h3 className="text-sm font-bold text-slate-200 flex items-center gap-2">
                         <span>Preferred / Nice-to-Have Skills</span>
                       </h3>
                     </div>
 
                     <div className="space-y-3">
                       <div>
-                        <span className="text-xs font-bold text-indigo-700 flex items-center gap-1 mb-2">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-indigo-600" /> Matched Preferred
+                        <span className="text-xs font-bold text-cyan-400 flex items-center gap-1 mb-2">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400" /> Matched Preferred
                         </span>
                         <div className="flex flex-wrap gap-2">
                           {skillMatch.matched_preferred.length > 0 ? (
                             skillMatch.matched_preferred.map((s: string) => (
-                              <Badge key={s} variant="default" className="font-semibold text-xs py-1 px-2.5">
+                              <Badge key={s} variant="cyan" className="font-semibold text-xs py-1 px-2.5">
                                 ✓ {s}
                               </Badge>
                             ))
                           ) : (
-                            <span className="text-xs text-slate-400 italic">None matched.</span>
+                            <span className="text-xs text-slate-500 italic">None matched.</span>
                           )}
                         </div>
                       </div>
 
                       {skillMatch.missing_preferred.length > 0 && (
                         <div className="pt-2">
-                          <span className="text-xs font-bold text-slate-500 flex items-center gap-1 mb-2">
+                          <span className="text-xs font-bold text-slate-400 flex items-center gap-1 mb-2">
                             Missing Preferred
                           </span>
                           <div className="flex flex-wrap gap-2">
                             {skillMatch.missing_preferred.map((s: string) => (
-                              <Badge key={s} variant="secondary" className="font-medium text-xs py-1 px-2.5 text-slate-600">
+                              <Badge key={s} variant="secondary" className="font-medium text-xs py-1 px-2.5 text-slate-400">
                                 {s}
                               </Badge>
                             ))}
@@ -704,14 +704,14 @@ export default function ResultsPage() {
 
             {/* TAB 2: KEYWORDS */}
             <TabsContent value="keywords">
-              <Card className="border-slate-200/90 shadow-sm">
+              <Card className="border-white/10 shadow-xl bg-[#090d1a]/90 backdrop-blur-2xl">
                 <CardHeader>
                   <div className="flex items-center justify-between">
                     <div>
-                      <CardTitle className="text-xl font-bold text-slate-900">
+                      <CardTitle className="text-xl font-bold text-white">
                         Keyword & Terminology Audit
                       </CardTitle>
-                      <CardDescription className="text-xs">
+                      <CardDescription className="text-xs text-slate-400">
                         Frequency analysis of job-specific keywords throughout your resume text
                       </CardDescription>
                     </div>
@@ -722,16 +722,16 @@ export default function ResultsPage() {
                 </CardHeader>
                 <CardContent className="space-y-6">
                   <div>
-                    <h3 className="text-sm font-bold text-slate-900 mb-3 flex items-center gap-2">
-                      <CheckCircle2 className="h-4 w-4 text-emerald-600" />
+                    <h3 className="text-sm font-bold text-slate-200 mb-3 flex items-center gap-2">
+                      <CheckCircle2 className="h-4 w-4 text-emerald-400" />
                       Matched Domain Terms ({kwMatch.matched.length})
                     </h3>
                     <div className="flex flex-wrap gap-2">
                       {kwMatch.matched.length > 0 ? (
                         kwMatch.matched.map((kw: string) => (
-                          <div key={kw} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100/80 border border-slate-200/80 text-xs font-semibold text-slate-800 shadow-2xs">
+                          <div key={kw} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900/80 border border-white/10 text-xs font-semibold text-slate-200 shadow-sm">
                             <span>{kw}</span>
-                            <span className="bg-indigo-600 text-white text-[10px] font-black px-1.5 py-0.2 rounded-md">
+                            <span className="bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 text-[10px] font-black px-1.5 py-0.2 rounded-md">
                               {kwMatch.frequencies?.[kw] || 1}x
                             </span>
                           </div>
@@ -743,14 +743,14 @@ export default function ResultsPage() {
                   </div>
 
                   {kwMatch.missing.length > 0 && (
-                    <div className="pt-2 border-t border-slate-100">
-                      <h3 className="text-sm font-bold text-slate-900 mb-3 flex items-center gap-2">
-                        <AlertCircle className="h-4 w-4 text-amber-500" />
+                    <div className="pt-2 border-t border-white/10">
+                      <h3 className="text-sm font-bold text-slate-200 mb-3 flex items-center gap-2">
+                        <AlertCircle className="h-4 w-4 text-amber-400" />
                         Missing Keywords to Consider Adding ({kwMatch.missing.length})
                       </h3>
                       <div className="flex flex-wrap gap-2">
                         {kwMatch.missing.map((kw: string) => (
-                          <Badge key={kw} variant="outline" className="px-3 py-1.5 text-xs text-amber-800 border-amber-200 bg-amber-50/50 font-medium">
+                          <Badge key={kw} variant="outline" className="px-3 py-1.5 text-xs text-amber-300 border-amber-500/30 bg-amber-500/10 font-medium">
                             + {kw}
                           </Badge>
                         ))}
@@ -763,14 +763,14 @@ export default function ResultsPage() {
 
             {/* TAB 3: SEMANTIC RELEVANCE */}
             <TabsContent value="semantic">
-              <Card className="border-slate-200/90 shadow-sm">
+              <Card className="border-white/10 shadow-xl bg-[#090d1a]/90 backdrop-blur-2xl">
                 <CardHeader>
                   <div className="flex items-center justify-between">
                     <div>
-                      <CardTitle className="text-xl font-bold text-slate-900">
+                      <CardTitle className="text-xl font-bold text-white">
                         Semantic Relevance (Sentence Embeddings)
                       </CardTitle>
-                      <CardDescription className="text-xs">
+                      <CardDescription className="text-xs text-slate-400">
                         Calculates deep contextual similarity between your experience descriptions and job requirements
                       </CardDescription>
                     </div>
@@ -781,21 +781,21 @@ export default function ResultsPage() {
                 </CardHeader>
                 <CardContent className="space-y-6">
                   {semMatch?.status === "unavailable" ? (
-                    <div className="p-4 border rounded-xl bg-slate-50 flex items-start gap-3">
-                      <AlertCircle className="h-5 w-5 text-slate-500 mt-0.5" />
-                      <p className="text-sm text-slate-600">Semantic embeddings model is currently warming up or unavailable.</p>
+                    <div className="p-4 border border-white/10 rounded-xl bg-slate-900/60 flex items-start gap-3">
+                      <AlertCircle className="h-5 w-5 text-slate-400 mt-0.5" />
+                      <p className="text-sm text-slate-400">Semantic embeddings model is currently warming up or unavailable.</p>
                     </div>
                   ) : (
                     <div className="space-y-6">
                       {/* Overall Progress Bar */}
-                      <div className="p-5 rounded-2xl bg-gradient-to-r from-indigo-50/80 to-cyan-50/80 border border-indigo-100">
+                      <div className="p-5 rounded-2xl bg-gradient-to-r from-slate-900/90 via-cyan-950/30 to-purple-950/30 border border-white/10">
                         <div className="flex items-center justify-between mb-2">
-                          <span className="text-sm font-bold text-slate-900">Overall Semantic Alignment</span>
-                          <span className="text-base font-black text-indigo-700">{semMatch?.overall_similarity || 0}%</span>
+                          <span className="text-sm font-bold text-slate-200">Overall Semantic Alignment</span>
+                          <span className="text-base font-black text-cyan-400">{semMatch?.overall_similarity || 0}%</span>
                         </div>
-                        <div className="w-full bg-white/80 rounded-full h-3 p-0.5 border border-indigo-200/60">
+                        <div className="w-full bg-slate-950 rounded-full h-3 p-0.5 border border-white/10">
                           <div 
-                            className="bg-gradient-to-r from-indigo-600 via-purple-600 to-cyan-500 h-full rounded-full transition-all duration-700"
+                            className="bg-gradient-to-r from-cyan-500 via-indigo-500 to-purple-500 h-full rounded-full transition-all duration-700 shadow-sm shadow-cyan-500/30"
                             style={{ width: `${semMatch?.overall_similarity || 0}%` }}
                           />
                         </div>
@@ -804,39 +804,39 @@ export default function ResultsPage() {
                       {/* Section by Section Progress */}
                       <div className="space-y-4 pt-2">
                         <div>
-                          <div className="flex justify-between text-xs font-bold text-slate-700 mb-1.5">
+                          <div className="flex justify-between text-xs font-bold text-slate-300 mb-1.5">
                             <span>Summary & Objective Alignment</span>
-                            <span>{semMatch?.summary_similarity ?? semMatch?.overall_similarity ?? 0}%</span>
+                            <span className="text-cyan-400">{semMatch?.summary_similarity ?? semMatch?.overall_similarity ?? 0}%</span>
                           </div>
-                          <div className="w-full bg-slate-100 rounded-full h-2.5">
+                          <div className="w-full bg-slate-950 rounded-full h-2.5 border border-white/5">
                             <div 
-                              className="bg-indigo-600 h-2.5 rounded-full transition-all duration-700" 
+                              className="bg-cyan-500 h-2.5 rounded-full transition-all duration-700" 
                               style={{ width: `${semMatch?.summary_similarity ?? semMatch?.overall_similarity ?? 0}%` }} 
                             />
                           </div>
                         </div>
 
                         <div>
-                          <div className="flex justify-between text-xs font-bold text-slate-700 mb-1.5">
+                          <div className="flex justify-between text-xs font-bold text-slate-300 mb-1.5">
                             <span>Work Experience Descriptions</span>
-                            <span>{semMatch?.experience_similarity ?? semMatch?.overall_similarity ?? 0}%</span>
+                            <span className="text-emerald-400">{semMatch?.experience_similarity ?? semMatch?.overall_similarity ?? 0}%</span>
                           </div>
-                          <div className="w-full bg-slate-100 rounded-full h-2.5">
+                          <div className="w-full bg-slate-950 rounded-full h-2.5 border border-white/5">
                             <div 
-                              className="bg-emerald-600 h-2.5 rounded-full transition-all duration-700" 
+                              className="bg-emerald-500 h-2.5 rounded-full transition-all duration-700" 
                               style={{ width: `${semMatch?.experience_similarity ?? semMatch?.overall_similarity ?? 0}%` }} 
                             />
                           </div>
                         </div>
 
                         <div>
-                          <div className="flex justify-between text-xs font-bold text-slate-700 mb-1.5">
+                          <div className="flex justify-between text-xs font-bold text-slate-300 mb-1.5">
                             <span>Technical Skill Depth</span>
-                            <span>{semMatch?.skills_similarity ?? semMatch?.overall_similarity ?? 0}%</span>
+                            <span className="text-purple-400">{semMatch?.skills_similarity ?? semMatch?.overall_similarity ?? 0}%</span>
                           </div>
-                          <div className="w-full bg-slate-100 rounded-full h-2.5">
+                          <div className="w-full bg-slate-950 rounded-full h-2.5 border border-white/5">
                             <div 
-                              className="bg-purple-600 h-2.5 rounded-full transition-all duration-700" 
+                              className="bg-purple-500 h-2.5 rounded-full transition-all duration-700" 
                               style={{ width: `${semMatch?.skills_similarity ?? semMatch?.overall_similarity ?? 0}%` }} 
                             />
                           </div>
@@ -850,15 +850,15 @@ export default function ResultsPage() {
 
             {/* TAB 4: AI INSIGHTS */}
             <TabsContent value="ai">
-              <Card className="border-slate-200/90 shadow-sm">
+              <Card className="border-white/10 shadow-xl bg-[#090d1a]/90 backdrop-blur-2xl">
                 <CardHeader>
                   <div className="flex items-center justify-between">
                     <div>
-                      <CardTitle className="text-xl font-bold text-slate-900 flex items-center gap-2">
-                        <Sparkles className="text-indigo-600 h-5 w-5" />
+                      <CardTitle className="text-xl font-bold text-white flex items-center gap-2">
+                        <Sparkles className="text-cyan-400 h-5 w-5" />
                         AI Strategic Insights
                       </CardTitle>
-                      <CardDescription className="text-xs">
+                      <CardDescription className="text-xs text-slate-400">
                         Qualitative reasoning and hiring manager perspectives generated by Gemini AI
                       </CardDescription>
                     </div>
@@ -866,40 +866,40 @@ export default function ResultsPage() {
                 </CardHeader>
                 <CardContent className="space-y-6">
                   {loadingInsights ? (
-                    <div className="flex flex-col items-center justify-center p-12 text-slate-500 space-y-3">
-                      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600" />
+                    <div className="flex flex-col items-center justify-center p-12 text-slate-400 space-y-3">
+                      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-cyan-400" />
                       <p className="text-sm font-semibold">Generating strategic AI insights...</p>
                     </div>
                   ) : insightError ? (
-                    <div className="p-4 border rounded-xl bg-amber-50 border-amber-200 flex items-start gap-3">
-                      <AlertCircle className="h-5 w-5 text-amber-600 mt-0.5 shrink-0" />
-                      <p className="text-sm text-amber-800">{insightError}</p>
+                    <div className="p-4 border rounded-xl bg-amber-500/10 border-amber-500/30 flex items-start gap-3">
+                      <AlertCircle className="h-5 w-5 text-amber-400 mt-0.5 shrink-0" />
+                      <p className="text-sm text-amber-200">{insightError}</p>
                     </div>
                   ) : insights ? (
                     <div className="space-y-6">
                       {/* Overall Assessment Banner */}
-                      <div className="flex items-center gap-4 p-4 rounded-2xl bg-gradient-to-r from-indigo-50 via-purple-50 to-white border border-indigo-100 shadow-xs">
-                        <div className="h-12 w-12 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-black text-xl shrink-0 shadow-sm">
+                      <div className="flex items-center gap-4 p-4 rounded-2xl bg-gradient-to-r from-slate-900 via-cyan-950/40 to-slate-900 border border-cyan-500/30 shadow-md">
+                        <div className="h-12 w-12 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 text-slate-950 flex items-center justify-center font-black text-xl shrink-0 shadow-lg shadow-cyan-500/20">
                           {((overallScore || 70) / 10).toFixed(1)}
                         </div>
                         <div>
-                          <p className="text-sm font-bold text-slate-900">{insights.overall_resume_quality || scoreLabel}</p>
-                          <p className="text-xs text-slate-500">AI Qualitative Synthesis</p>
+                          <p className="text-sm font-bold text-white">{insights.overall_resume_quality || scoreLabel}</p>
+                          <p className="text-xs text-slate-400">AI Qualitative Synthesis</p>
                         </div>
                       </div>
 
                       {/* Strengths & Weaknesses 2-Column Grid */}
                       <div className="grid md:grid-cols-2 gap-6">
                         {/* Strengths */}
-                        <div className="p-5 rounded-2xl border border-emerald-200/80 bg-emerald-50/30 space-y-3">
-                          <h3 className="font-bold text-emerald-800 text-sm flex items-center gap-2">
-                            <CheckCircle2 className="h-4 w-4 text-emerald-600" />
+                        <div className="p-5 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 space-y-3">
+                          <h3 className="font-bold text-emerald-300 text-sm flex items-center gap-2">
+                            <CheckCircle2 className="h-4 w-4 text-emerald-400" />
                             Key Strengths
                           </h3>
-                          <ul className="space-y-2 text-xs text-slate-700 leading-relaxed">
+                          <ul className="space-y-2 text-xs text-slate-300 leading-relaxed">
                             {insights.strengths?.map((s: string, i: number) => (
                               <li key={i} className="flex items-start gap-2">
-                                <span className="text-emerald-600 font-bold">✓</span>
+                                <span className="text-emerald-400 font-bold">✓</span>
                                 <span>{s}</span>
                               </li>
                             ))}
@@ -907,15 +907,15 @@ export default function ResultsPage() {
                         </div>
 
                         {/* Weaknesses */}
-                        <div className="p-5 rounded-2xl border border-amber-200/80 bg-amber-50/30 space-y-3">
-                          <h3 className="font-bold text-amber-800 text-sm flex items-center gap-2">
-                            <AlertCircle className="h-4 w-4 text-amber-600" />
+                        <div className="p-5 rounded-2xl border border-amber-500/30 bg-amber-500/10 space-y-3">
+                          <h3 className="font-bold text-amber-300 text-sm flex items-center gap-2">
+                            <AlertCircle className="h-4 w-4 text-amber-400" />
                             Areas for Improvement
                           </h3>
-                          <ul className="space-y-2 text-xs text-slate-700 leading-relaxed">
+                          <ul className="space-y-2 text-xs text-slate-300 leading-relaxed">
                             {insights.weaknesses?.map((w: string, i: number) => (
                               <li key={i} className="flex items-start gap-2">
-                                <span className="text-amber-600 font-bold">⚠</span>
+                                <span className="text-amber-400 font-bold">⚠</span>
                                 <span>{w}</span>
                               </li>
                             ))}
@@ -924,15 +924,15 @@ export default function ResultsPage() {
                       </div>
 
                       {/* Actionable Recommendations */}
-                      <div className="p-5 rounded-2xl border border-indigo-100 bg-white space-y-3 shadow-xs">
-                        <h3 className="font-bold text-indigo-900 text-sm flex items-center gap-2">
-                          <Sparkles className="h-4 w-4 text-indigo-600" />
+                      <div className="p-5 rounded-2xl border border-white/10 bg-slate-900/60 space-y-3 shadow-sm">
+                        <h3 className="font-bold text-cyan-300 text-sm flex items-center gap-2">
+                          <Sparkles className="h-4 w-4 text-cyan-400" />
                           Actionable Next Steps
                         </h3>
                         <div className="space-y-2.5">
                           {insights.recommendations?.map((r: string, i: number) => (
-                            <div key={i} className="flex items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100 text-xs text-slate-700">
-                              <span className="h-5 w-5 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-[10px] shrink-0">
+                            <div key={i} className="flex items-start gap-3 p-3 rounded-xl bg-slate-950/80 border border-white/5 text-xs text-slate-300">
+                              <span className="h-5 w-5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 flex items-center justify-center font-bold text-[10px] shrink-0">
                                 {i + 1}
                               </span>
                               <span className="leading-relaxed">{r}</span>
@@ -948,24 +948,24 @@ export default function ResultsPage() {
 
             {/* TAB 5: BULLET REWRITER */}
             <TabsContent value="rewrite">
-              <Card className="border-slate-200/90 shadow-sm">
+              <Card className="border-white/10 shadow-xl bg-[#090d1a]/90 backdrop-blur-2xl">
                 <CardHeader>
-                  <CardTitle className="text-xl font-bold text-slate-900 flex items-center gap-2">
-                    <Wand2 className="text-violet-600 h-5 w-5" />
+                  <CardTitle className="text-xl font-bold text-white flex items-center gap-2">
+                    <Wand2 className="text-purple-400 h-5 w-5" />
                     AI Resume Bullet Optimizer
                   </CardTitle>
-                  <CardDescription className="text-xs">
+                  <CardDescription className="text-xs text-slate-400">
                     Transform weak or passive bullet points into high-impact, quantified statements while preserving factual truth.
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
                   {/* Interactive Bullet Input Box */}
-                  <div className="space-y-3 bg-slate-50/80 p-5 rounded-2xl border border-slate-200/80">
-                    <label className="text-xs font-bold text-slate-700 uppercase tracking-wider block">
+                  <div className="space-y-3 bg-slate-900/60 p-5 rounded-2xl border border-white/10">
+                    <label className="text-xs font-bold text-slate-300 uppercase tracking-wider block">
                       Enter a Resume Bullet Point to Improve:
                     </label>
                     <textarea 
-                      className="w-full min-h-[90px] p-3.5 border border-slate-200 rounded-xl bg-white text-sm text-slate-900 focus:outline-none focus:ring-4 focus:ring-indigo-500/15 focus:border-indigo-500 transition-all leading-relaxed shadow-2xs"
+                      className="w-full min-h-[90px] p-3.5 border border-white/10 rounded-xl bg-slate-950 text-sm text-slate-100 focus:outline-none focus:ring-4 focus:ring-cyan-500/15 focus:border-cyan-500 transition-all leading-relaxed shadow-inner"
                       placeholder="e.g., Built web application using React and handled API endpoints."
                       value={rewriteInput}
                       onChange={(e) => setRewriteInput(e.target.value)}
@@ -975,16 +975,16 @@ export default function ResultsPage() {
                       <Button 
                         onClick={handleRewrite} 
                         disabled={rewriteLoading || rewriteInput.trim().length < 5}
-                        className="font-bold shadow-md shadow-indigo-500/20"
+                        className="font-bold shadow-lg shadow-cyan-500/20"
                       >
                         {rewriteLoading ? (
                           <>
-                            <Wand2 className="mr-2 h-4 w-4 animate-spin" />
+                            <Wand2 className="mr-2 h-4 w-4 animate-spin text-cyan-300" />
                             Optimizing Bullet...
                           </>
                         ) : (
                           <>
-                            <Wand2 className="mr-2 h-4 w-4" />
+                            <Wand2 className="mr-2 h-4 w-4 text-cyan-200" />
                             Improve Bullet Point
                           </>
                         )}
@@ -993,7 +993,7 @@ export default function ResultsPage() {
                   </div>
                   
                   {rewriteError && (
-                    <div className="p-4 border rounded-xl bg-rose-50 border-rose-200 text-rose-700 text-xs font-medium flex items-center gap-2">
+                    <div className="p-4 border rounded-xl bg-rose-500/10 border-rose-500/30 text-rose-300 text-xs font-medium flex items-center gap-2">
                       <AlertCircle className="h-4 w-4 shrink-0" />
                       <p>{rewriteError}</p>
                     </div>
@@ -1007,73 +1007,73 @@ export default function ResultsPage() {
 
                       <div className="grid gap-4">
                         {/* Variation 1: Concise */}
-                        <div className="p-4 rounded-xl border border-indigo-200/80 bg-indigo-50/30 relative group shadow-2xs hover:shadow-sm transition-shadow">
+                        <div className="p-4 rounded-xl border border-cyan-500/30 bg-cyan-500/10 relative group shadow-sm hover:border-cyan-500/50 transition-all">
                           <div className="flex items-center justify-between mb-1.5">
-                            <span className="text-[11px] font-bold text-indigo-700 uppercase tracking-wider">
+                            <span className="text-[11px] font-bold text-cyan-300 uppercase tracking-wider">
                               ⚡ Concise & Direct
                             </span>
                             <Button 
                               variant="outline" 
                               size="sm" 
-                              className="h-7 px-2.5 text-xs font-semibold rounded-lg bg-white"
+                              className="h-7 px-2.5 text-xs font-semibold rounded-lg"
                               onClick={() => handleCopy(rewriteResult.concise, 'concise')}
                             >
                               {copiedField === 'concise' ? (
-                                <span className="flex items-center gap-1 text-emerald-600 font-bold"><Check className="h-3.5 w-3.5" /> Copied</span>
+                                <span className="flex items-center gap-1 text-emerald-400 font-bold"><Check className="h-3.5 w-3.5" /> Copied</span>
                               ) : (
-                                <span className="flex items-center gap-1 text-slate-600"><Copy className="h-3.5 w-3.5" /> Copy</span>
+                                <span className="flex items-center gap-1 text-slate-300"><Copy className="h-3.5 w-3.5" /> Copy</span>
                               )}
                             </Button>
                           </div>
-                          <p className="text-slate-800 text-xs sm:text-sm font-medium pr-12 leading-relaxed">
+                          <p className="text-slate-200 text-xs sm:text-sm font-medium pr-12 leading-relaxed">
                             {rewriteResult.concise}
                           </p>
                         </div>
 
                         {/* Variation 2: Technical */}
-                        <div className="p-4 rounded-xl border border-violet-200/80 bg-violet-50/30 relative group shadow-2xs hover:shadow-sm transition-shadow">
+                        <div className="p-4 rounded-xl border border-purple-500/30 bg-purple-500/10 relative group shadow-sm hover:border-purple-500/50 transition-all">
                           <div className="flex items-center justify-between mb-1.5">
-                            <span className="text-[11px] font-bold text-violet-700 uppercase tracking-wider">
+                            <span className="text-[11px] font-bold text-purple-300 uppercase tracking-wider">
                               🛠 Technical & Architectural
                             </span>
                             <Button 
                               variant="outline" 
                               size="sm" 
-                              className="h-7 px-2.5 text-xs font-semibold rounded-lg bg-white"
+                              className="h-7 px-2.5 text-xs font-semibold rounded-lg"
                               onClick={() => handleCopy(rewriteResult.technical, 'technical')}
                             >
                               {copiedField === 'technical' ? (
-                                <span className="flex items-center gap-1 text-emerald-600 font-bold"><Check className="h-3.5 w-3.5" /> Copied</span>
+                                <span className="flex items-center gap-1 text-emerald-400 font-bold"><Check className="h-3.5 w-3.5" /> Copied</span>
                               ) : (
-                                <span className="flex items-center gap-1 text-slate-600"><Copy className="h-3.5 w-3.5" /> Copy</span>
+                                <span className="flex items-center gap-1 text-slate-300"><Copy className="h-3.5 w-3.5" /> Copy</span>
                               )}
                             </Button>
                           </div>
-                          <p className="text-slate-800 text-xs sm:text-sm font-medium pr-12 leading-relaxed">
+                          <p className="text-slate-200 text-xs sm:text-sm font-medium pr-12 leading-relaxed">
                             {rewriteResult.technical}
                           </p>
                         </div>
 
                         {/* Variation 3: Achievement-Focused */}
-                        <div className="p-4 rounded-xl border border-emerald-200/80 bg-emerald-50/30 relative group shadow-2xs hover:shadow-sm transition-shadow">
+                        <div className="p-4 rounded-xl border border-emerald-500/30 bg-emerald-500/10 relative group shadow-sm hover:border-emerald-500/50 transition-all">
                           <div className="flex items-center justify-between mb-1.5">
-                            <span className="text-[11px] font-bold text-emerald-700 uppercase tracking-wider">
+                            <span className="text-[11px] font-bold text-emerald-300 uppercase tracking-wider">
                               🏆 Achievement & Impact Oriented
                             </span>
                             <Button 
                               variant="outline" 
                               size="sm" 
-                              className="h-7 px-2.5 text-xs font-semibold rounded-lg bg-white"
+                              className="h-7 px-2.5 text-xs font-semibold rounded-lg"
                               onClick={() => handleCopy(rewriteResult.achievement_focused, 'achievement')}
                             >
                               {copiedField === 'achievement' ? (
-                                <span className="flex items-center gap-1 text-emerald-600 font-bold"><Check className="h-3.5 w-3.5" /> Copied</span>
+                                <span className="flex items-center gap-1 text-emerald-400 font-bold"><Check className="h-3.5 w-3.5" /> Copied</span>
                               ) : (
-                                <span className="flex items-center gap-1 text-slate-600"><Copy className="h-3.5 w-3.5" /> Copy</span>
+                                <span className="flex items-center gap-1 text-slate-300"><Copy className="h-3.5 w-3.5" /> Copy</span>
                               )}
                             </Button>
                           </div>
-                          <p className="text-slate-800 text-xs sm:text-sm font-medium pr-12 leading-relaxed">
+                          <p className="text-slate-200 text-xs sm:text-sm font-medium pr-12 leading-relaxed">
                             {rewriteResult.achievement_focused}
                           </p>
                         </div>
@@ -1086,26 +1086,26 @@ export default function ResultsPage() {
 
             {/* TAB 6: INTERVIEW PREPARATION */}
             <TabsContent value="interview">
-              <Card className="border-slate-200/90 shadow-sm">
+              <Card className="border-white/10 shadow-xl bg-[#090d1a]/90 backdrop-blur-2xl">
                 <CardHeader>
-                  <CardTitle className="text-xl font-bold text-slate-900 flex items-center gap-2">
-                    <MessagesSquare className="text-cyan-600 h-5 w-5" />
+                  <CardTitle className="text-xl font-bold text-white flex items-center gap-2">
+                    <MessagesSquare className="text-cyan-400 h-5 w-5" />
                     Personalized Interview Preparation
                   </CardTitle>
-                  <CardDescription className="text-xs">
+                  <CardDescription className="text-xs text-slate-400">
                     Targeted practice questions derived from the intersections of your background and the job requirements
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
                   {loadingInterview ? (
-                    <div className="flex flex-col items-center justify-center p-12 text-slate-500 space-y-3">
-                      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-cyan-600" />
+                    <div className="flex flex-col items-center justify-center p-12 text-slate-400 space-y-3">
+                      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-cyan-400" />
                       <p className="text-sm font-semibold">Synthesizing interview questions...</p>
                     </div>
                   ) : interviewError ? (
-                    <div className="p-4 border rounded-xl bg-amber-50 border-amber-200 flex items-start gap-3">
-                      <AlertCircle className="h-5 w-5 text-amber-600 mt-0.5 shrink-0" />
-                      <p className="text-sm text-amber-800">{interviewError}</p>
+                    <div className="p-4 border rounded-xl bg-amber-500/10 border-amber-500/30 flex items-start gap-3">
+                      <AlertCircle className="h-5 w-5 text-amber-400 mt-0.5 shrink-0" />
+                      <p className="text-sm text-amber-200">{interviewError}</p>
                     </div>
                   ) : interviewQuestions ? (
                     <div className="space-y-8">
@@ -1122,12 +1122,12 @@ export default function ResultsPage() {
 
                         return (
                           <div key={category} className="space-y-3">
-                            <h3 className="font-bold text-slate-900 text-sm sm:text-base border-b border-slate-100 pb-2">
+                            <h3 className="font-bold text-white text-sm sm:text-base border-b border-white/10 pb-2">
                               {titleMap[category]}
                             </h3>
                             <div className="space-y-3">
                               {questions.map((q: any, i: number) => (
-                                <div key={i} className="p-4 rounded-xl border border-slate-200/80 bg-white shadow-2xs hover:shadow-sm transition-shadow">
+                                <div key={i} className="p-4 rounded-xl border border-white/10 bg-slate-900/70 shadow-sm hover:border-cyan-500/30 transition-all">
                                   <div className="flex justify-between items-start mb-2 gap-2">
                                     <div className="flex items-center gap-2 flex-wrap">
                                       <Badge variant={
@@ -1136,30 +1136,30 @@ export default function ResultsPage() {
                                       } className="text-[10px] font-bold py-0.5">
                                         {q.difficulty}
                                       </Badge>
-                                      <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wide">
+                                      <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wide">
                                         {q.topic}
                                       </span>
                                     </div>
                                     <Button 
                                       variant="ghost" 
                                       size="sm" 
-                                      className="h-7 px-2 text-slate-400 hover:text-indigo-600 rounded-lg"
+                                      className="h-7 px-2 text-slate-400 hover:text-cyan-400 rounded-lg"
                                       onClick={() => handleCopy(q.question, `q-${category}-${i}`)}
                                     >
                                       {copiedField === `q-${category}-${i}` ? (
-                                        <Check className="h-3.5 w-3.5 text-emerald-600" />
+                                        <Check className="h-3.5 w-3.5 text-emerald-400" />
                                       ) : (
                                         <Copy className="h-3.5 w-3.5" />
                                       )}
                                     </Button>
                                   </div>
-                                  <p className="text-slate-900 font-semibold text-xs sm:text-sm mb-2.5 leading-relaxed">
+                                  <p className="text-slate-100 font-semibold text-xs sm:text-sm mb-2.5 leading-relaxed">
                                     {q.question}
                                   </p>
                                   {q.why_it_matters && (
-                                    <div className="bg-slate-50 p-2.5 rounded-lg text-xs text-slate-600 border border-slate-100 flex items-start gap-1.5">
-                                      <span className="font-bold text-indigo-700 shrink-0">Hiring Intent:</span>
-                                      <span className="text-slate-600 leading-relaxed">{q.why_it_matters}</span>
+                                    <div className="bg-slate-950/80 p-2.5 rounded-lg text-xs text-slate-300 border border-white/5 flex items-start gap-1.5">
+                                      <span className="font-bold text-cyan-400 shrink-0">Hiring Intent:</span>
+                                      <span className="text-slate-400 leading-relaxed">{q.why_it_matters}</span>
                                     </div>
                                   )}
                                 </div>
