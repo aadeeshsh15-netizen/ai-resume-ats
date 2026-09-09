@@ -8,7 +8,7 @@ databases:
 services:
   # FastAPI Backend Web Service
   - type: web
-    name: airesume-backend
+    name: airesume-ats-backend
     runtime: docker
     rootDir: backend
     dockerfilePath: ./Dockerfile
@@ -25,11 +25,11 @@ services:
       - key: JWT_SECRET
         generateValue: true
       - key: BACKEND_CORS_ORIGINS
-        value: '["https://airesume-frontend.onrender.com", "http://localhost:5173", "http://localhost:80"]'
+        value: '["https://airesume-ats-frontend.onrender.com", "http://localhost:5173", "http://localhost:80"]'
 
   # React Frontend Static Site
   - type: web
-    name: airesume-frontend
+    name: airesume-ats-frontend
     runtime: static
     rootDir: frontend
     buildCommand: npm ci && npm run build
@@ -40,4 +40,4 @@ services:
         destination: /index.html
     envVars:
       - key: VITE_API_URL
-        value: https://airesume-backend.onrender.com
+        value: https://airesume-ats-backend.onrender.com
