@@ -44,19 +44,12 @@ def match_semantics(resume: ParseResponse, jd: JobDescriptionAnalyzeResponse) ->
     jd_resps_combined = " ".join(jd.responsibilities)
     jd_full_text = f"{jd.job_title} {jd_resps_combined} {jd_skills_combined} {' '.join(jd.keywords)}".strip()
     
-    vec_resume_full = service.get_embedding(resume_full_text) if resume_full_text else None
-    vec_jd_full = service.get_embedding(jd_full_text) if jd_full_text else None
-    
-    sim_full = cosine_similarity(vec_resume_full, vec_jd_full) if (vec_resume_full is not None and vec_jd_full is not None) else 0.0
+    sim_full = service.compute_similarity(resume_full_text, jd_full_text)
     
     # 2. Summary Similarity
     resume_summary = resume_sections.get("summary", "").strip() or (resume_full_text[:400] if len(resume_full_text) > 50 else "")
     jd_summary = f"{jd.job_title} {jd_resps_combined[:300]}".strip()
-    
-    vec_summary = service.get_embedding(resume_summary) if resume_summary else None
-    vec_jd_summary = service.get_embedding(jd_summary) if jd_summary else vec_jd_full
-    
-    sim_summary = cosine_similarity(vec_summary, vec_jd_summary) if (vec_summary is not None and vec_jd_summary is not None) else sim_full
+    sim_summary = service.compute_similarity(resume_summary, jd_summary) if resume_summary else sim_full
     
     # 3. Experience & Projects Similarity
     resume_exp = (resume_sections.get("experience", "") + " " + resume_sections.get("projects", "")).strip()
@@ -64,10 +57,7 @@ def match_semantics(resume: ParseResponse, jd: JobDescriptionAnalyzeResponse) ->
         resume_exp = resume_full_text
         
     jd_exp_text = jd_resps_combined if jd_resps_combined else jd_full_text
-    vec_exp = service.get_embedding(resume_exp) if resume_exp else None
-    vec_jd_exp = service.get_embedding(jd_exp_text) if jd_exp_text else vec_jd_full
-    
-    sim_exp = cosine_similarity(vec_exp, vec_jd_exp) if (vec_exp is not None and vec_jd_exp is not None) else sim_full
+    sim_exp = service.compute_similarity(resume_exp, jd_exp_text) if resume_exp else sim_full
     
     # 4. Skills Similarity
     resume_skills_text = resume_sections.get("skills", "").strip()
@@ -76,10 +66,7 @@ def match_semantics(resume: ParseResponse, jd: JobDescriptionAnalyzeResponse) ->
         resume_skills_text = " ".join(extracted) if extracted else resume_full_text
         
     jd_skills_text = jd_skills_combined if jd_skills_combined else jd_full_text
-    vec_skills = service.get_embedding(resume_skills_text) if resume_skills_text else None
-    vec_jd_skills = service.get_embedding(jd_skills_text) if jd_skills_text else vec_jd_full
-    
-    sim_skills = cosine_similarity(vec_skills, vec_jd_skills) if (vec_skills is not None and vec_jd_skills is not None) else sim_full
+    sim_skills = service.compute_similarity(resume_skills_text, jd_skills_text) if resume_skills_text else sim_full
     
     # Weighting: Experience 35%, Skills 30%, Full Document 25%, Summary 10%
     overall = sim_exp * 0.35 + sim_skills * 0.30 + sim_full * 0.25 + sim_summary * 0.10

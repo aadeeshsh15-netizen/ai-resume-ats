@@ -26,6 +26,8 @@ services:
         generateValue: true
       - key: BACKEND_CORS_ORIGINS
         value: '["https://airesume-ats-frontend.onrender.com", "http://localhost:5173", "http://localhost:80"]'
+      - key: ENABLE_LOCAL_EMBEDDINGS
+        value: "false"
 
   # React Frontend Static Site
   - type: web
