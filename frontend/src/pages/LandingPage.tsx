@@ -4,258 +4,260 @@ import {
   Sparkles, 
   Target, 
   FileText, 
-  BrainCircuit, 
   MessagesSquare, 
-  CheckCircle2, 
-  AlertCircle, 
   Upload, 
   FileSearch, 
-  TrendingUp, 
-  ShieldCheck, 
-  Zap 
+  TrendingUp
 } from "lucide-react"
 import { Button } from "../components/ui/button"
-import { Badge } from "../components/ui/badge"
 
 export default function LandingPage() {
   return (
-    <div className="flex flex-col min-h-screen overflow-hidden text-slate-100">
+    <div className="flex flex-col min-h-screen text-[#f5f5f5] overflow-hidden">
       {/* Hero Section */}
-      <section className="relative pt-12 pb-24 md:pt-20 md:pb-32 px-4 sm:px-6 max-w-7xl mx-auto w-full">
-        {/* Glow Spheres */}
-        <div className="absolute top-10 left-10 -z-10 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute top-1/4 right-5 -z-10 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-10 left-1/3 -z-10 w-80 h-80 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
-
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-          {/* Left Column: Hero Copy */}
-          <div className="lg:col-span-7 flex flex-col items-start text-left space-y-6">
-            {/* Small Glowing Pill */}
-            <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 backdrop-blur-xl px-4 py-1.5 text-xs font-semibold text-cyan-300 shadow-lg shadow-cyan-500/10">
-              <span className="flex h-2 w-2 rounded-full bg-cyan-400 animate-pulse shadow-xs shadow-cyan-400" />
-              <Sparkles className="h-3.5 w-3.5 text-cyan-300" />
-              <span>Next-Gen Career Intelligence Platform</span>
+      <section className="relative pt-10 pb-20 md:pt-16 md:pb-28 px-4 sm:px-6 max-w-7xl mx-auto w-full">
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+          {/* Left Column: Editorial Headline & Actions */}
+          <div className="lg:col-span-6 flex flex-col items-start text-left space-y-6">
+            {/* Status Pill */}
+            <div className="inline-flex items-center gap-2 rounded-full border border-[#2a2a2a] bg-[#141414] px-3.5 py-1.5 text-xs font-bold text-[#bbf451]">
+              <span className="flex h-2 w-2 rounded-full bg-[#bbf451]" />
+              <span className="uppercase tracking-wider">AI CAREER INTELLIGENCE PLATFORM</span>
             </div>
 
-            {/* Main Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.12]">
-              More Than an ATS Checker. <br className="hidden sm:inline" />
-              <span className="gradient-text-cyan">Your Career Co-Pilot.</span>
+            {/* Main Bold Condensed Headline */}
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-[#f5f5f5] leading-[1.08]">
+              More Than an <br className="hidden sm:inline" />
+              ATS Checker. <br />
+              <span className="text-[#bbf451]">Your Career Intelligence.</span>
             </h1>
 
-            {/* Supporting Text */}
-            <p className="text-base sm:text-lg text-slate-400 max-w-xl leading-relaxed">
-              Match your resume to actual job listings, identify critical skill gaps, rewrite bullets for maximum ATS impact, and practice targeted interview questions before you apply.
+            {/* Editorial Supporting Description */}
+            <p className="text-base sm:text-lg text-[#888888] max-w-xl leading-relaxed font-normal">
+              Calibrated multi-factor resume evaluation. Audit keyword density, compute semantic NLP match, rewrite weak bullets with Gemini AI, and simulate targeted interview questions before submitting.
             </p>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto pt-2">
-              <Button size="lg" asChild className="font-bold text-base shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40">
+            {/* Action CTAs */}
+            <div className="flex flex-col sm:flex-row gap-3.5 w-full sm:w-auto pt-1">
+              <Button size="lg" asChild className="font-bold text-sm uppercase tracking-wider px-8 shadow-sm">
                 <Link to="/analyze">
-                  Analyze My Resume <ArrowRight className="ml-2 h-5 w-5" />
+                  Analyze Resume <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
               <Button 
                 size="lg" 
                 variant="outline" 
                 asChild 
-                className="font-bold text-base hover:border-cyan-400/50 hover:shadow-lg hover:shadow-cyan-500/10 hover:bg-slate-900/60 transition-all duration-300"
+                className="font-bold text-sm uppercase tracking-wider px-7"
               >
                 <Link to="/results">
-                  Try Demo Preview
+                  Explore Demo
                 </Link>
               </Button>
             </div>
 
-            {/* Trust indicators */}
-            <div className="pt-4 flex flex-wrap items-center gap-6 text-xs font-semibold text-slate-400">
+            {/* Precision capability chips */}
+            <div className="pt-3 flex flex-wrap items-center gap-5 text-xs font-bold uppercase tracking-wider text-[#737373]">
               <div className="flex items-center gap-2">
-                <ShieldCheck className="h-4 w-4 text-emerald-400" />
-                <span>Deterministic ATS Scoring</span>
+                <span className="h-2 w-2 rounded-full bg-[#bbf451]" />
+                <span>Deterministic ATS</span>
               </div>
               <div className="flex items-center gap-2">
-                <Zap className="h-4 w-4 text-cyan-400" />
+                <span className="h-2 w-2 rounded-full bg-[#fb923c]" />
                 <span>Semantic Embeddings</span>
               </div>
               <div className="flex items-center gap-2">
-                <BrainCircuit className="h-4 w-4 text-purple-400" />
-                <span>Gemini AI Insights</span>
+                <span className="h-2 w-2 rounded-full bg-white" />
+                <span>Gemini 2.5 Coaching</span>
               </div>
             </div>
           </div>
 
-          {/* Right Column: Visual Interactive Dashboard Preview */}
-          <div className="lg:col-span-5 relative">
-            <div className="relative mx-auto max-w-md lg:max-w-none">
-              {/* Outer Cyan/Purple Glow border */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500/30 via-indigo-500/30 to-purple-500/30 rounded-3xl blur-xl opacity-80" />
-
-              {/* Glass Card Container */}
-              <div className="relative rounded-2xl bg-[#090d1a]/90 backdrop-blur-2xl border border-white/10 p-6 shadow-2xl space-y-5">
-                {/* Header with Mock File Tag */}
-                <div className="flex items-center justify-between border-b border-white/10 pb-4">
-                  <div className="flex items-center gap-3">
-                    <div className="h-10 w-10 rounded-xl bg-cyan-500/15 border border-cyan-500/30 flex items-center justify-center text-cyan-300 font-bold shadow-sm shadow-cyan-500/20">
-                      <FileText className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <h4 className="text-sm font-bold text-slate-100">Alex_Rivers_Resume.pdf</h4>
-                      <p className="text-xs text-slate-400 font-medium">Target: Senior Full Stack Engineer</p>
-                    </div>
+          {/* Right Column: Reference-Inspired Analytical Console Preview */}
+          <div className="lg:col-span-6 relative">
+            {/* Outer Dark Dashboard Container */}
+            <div className="relative rounded-3xl bg-[#0e0e0e] border border-[#222222] p-5 md:p-6 shadow-2xl space-y-4">
+              {/* Console Top Bar */}
+              <div className="flex items-center justify-between border-b border-[#1c1c1c] pb-3">
+                <div className="flex items-center gap-2.5">
+                  <div className="h-7 w-7 rounded-lg bg-[#1a1a1a] border border-[#2c2c2c] flex items-center justify-center font-bold text-xs text-[#bbf451]">
+                    ATS
                   </div>
-                  <Badge variant="success" className="text-[10px] font-bold uppercase tracking-wider">
-                    Ready
-                  </Badge>
+                  <div>
+                    <h4 className="text-xs font-extrabold uppercase tracking-wider text-[#f5f5f5]">DIAGNOSTIC CONSOLE</h4>
+                    <p className="text-[10px] text-[#737373] uppercase font-semibold">Demo Evaluation // Senior Frontend Engineer</p>
+                  </div>
+                </div>
+                <span className="text-[10px] font-bold uppercase tracking-wider bg-[#bbf451]/15 text-[#bbf451] border border-[#bbf451]/30 px-2.5 py-1 rounded-full">
+                  CALIBRATED
+                </span>
+              </div>
+
+              {/* Top 2 Metric Cards Grid (Customer/Product style in reference) */}
+              <div className="grid grid-cols-2 gap-3">
+                {/* Score Card */}
+                <div className="rounded-2xl bg-[#141414] border border-[#222222] p-4 flex flex-col justify-between">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#888888]">COMPATIBILITY</span>
+                    <span className="text-[10px] font-bold text-[#bbf451] flex items-center gap-0.5">▲ +4.2%</span>
+                  </div>
+                  <div className="my-2">
+                    <div className="flex items-baseline gap-1">
+                      <span className="text-3xl font-black text-white tracking-tight">84</span>
+                      <span className="text-xs font-semibold text-[#666666]">/100</span>
+                    </div>
+                    <span className="text-[10px] font-bold text-[#bbf451] uppercase tracking-wider">STRONG MATCH</span>
+                  </div>
+                  <div className="text-[10px] text-[#737373]">Deterministic Index</div>
                 </div>
 
-                {/* Main Score Hero Card */}
-                <div className="grid grid-cols-2 gap-4 bg-gradient-to-br from-slate-900/90 to-slate-950/90 border border-white/10 rounded-xl p-5 shadow-inner">
-                  <div>
-                    <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">
-                      Overall ATS Match
-                    </span>
-                    <div className="flex items-baseline gap-1 mt-1">
-                      <span className="text-4xl font-black tracking-tight text-white">84</span>
-                      <span className="text-sm font-medium text-slate-500">/ 100</span>
+                {/* Factors Card */}
+                <div className="rounded-2xl bg-[#141414] border border-[#222222] p-4 flex flex-col justify-between">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#888888]">CRITICAL SKILLS</span>
+                    <span className="text-[10px] font-bold text-[#fb923c] flex items-center gap-0.5">▼ 2 Gaps</span>
+                  </div>
+                  <div className="my-2">
+                    <div className="flex items-baseline gap-1">
+                      <span className="text-3xl font-black text-white tracking-tight">91%</span>
                     </div>
-                    <span className="inline-block mt-2 text-[10px] font-bold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 px-2.5 py-0.5 rounded-full">
-                      High Compatibility
-                    </span>
+                    <span className="text-[10px] font-bold text-[#f5f5f5] uppercase tracking-wider">8 / 9 MATCHED</span>
+                  </div>
+                  <div className="text-[10px] text-[#737373]">Required Core Fit</div>
+                </div>
+              </div>
+
+              {/* Timeline / Distribution Bars (Inspired by Projects Timeline in reference) */}
+              <div className="rounded-2xl bg-[#141414] border border-[#222222] p-4 space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#888888]">
+                    COMPETENCY ALIGNMENT MATRIX
+                  </span>
+                  <span className="text-[10px] font-mono text-[#666666]">WEIGHTED 100%</span>
+                </div>
+
+                <div className="space-y-2 text-xs">
+                  {/* Skill item 1: React & TS (Lime) */}
+                  <div className="flex items-center justify-between gap-3">
+                    <span className="w-24 text-[11px] font-semibold text-[#a0a0a0] truncate">React & TS</span>
+                    <div className="flex-1 h-6 bg-[#1a1a1a] rounded-lg p-0.5 relative overflow-hidden flex items-center">
+                      <div className="h-full bg-[#bbf451] rounded-md flex items-center justify-end px-2 text-[10px] font-black text-[#050505]" style={{ width: "94%" }}>
+                        94%
+                      </div>
+                    </div>
                   </div>
 
-                  {/* Circular visual ring */}
-                  <div className="flex items-center justify-center">
-                    <div className="relative h-20 w-20 flex items-center justify-center">
-                      <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
-                        <circle cx="50" cy="50" r="40" fill="none" stroke="#1e293b" strokeWidth="8" />
-                        <circle 
-                          cx="50" cy="50" r="40" fill="none" 
-                          stroke="#10b981" 
-                          strokeWidth="8" 
-                          strokeDasharray="251.2" 
-                          strokeDashoffset="40.2" 
-                          strokeLinecap="round" 
-                          className="drop-shadow-[0_0_8px_rgba(16,185,129,0.5)]"
-                        />
-                      </svg>
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <TrendingUp className="h-6 w-6 text-emerald-400" />
+                  {/* Skill item 2: REST & GraphQL (Lime) */}
+                  <div className="flex items-center justify-between gap-3">
+                    <span className="w-24 text-[11px] font-semibold text-[#a0a0a0] truncate">REST / APIs</span>
+                    <div className="flex-1 h-6 bg-[#1a1a1a] rounded-lg p-0.5 relative overflow-hidden flex items-center">
+                      <div className="h-full bg-[#bbf451] rounded-md flex items-center justify-end px-2 text-[10px] font-black text-[#050505]" style={{ width: "88%" }}>
+                        88%
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Skill item 3: Semantic Relevance (White) */}
+                  <div className="flex items-center justify-between gap-3">
+                    <span className="w-24 text-[11px] font-semibold text-[#a0a0a0] truncate">Semantics</span>
+                    <div className="flex-1 h-6 bg-[#1a1a1a] rounded-lg p-0.5 relative overflow-hidden flex items-center">
+                      <div className="h-full bg-white rounded-md flex items-center justify-end px-2 text-[10px] font-black text-[#050505]" style={{ width: "86%" }}>
+                        86%
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Skill item 4: Missing Cloud Skills (Orange) */}
+                  <div className="flex items-center justify-between gap-3">
+                    <span className="w-24 text-[11px] font-semibold text-[#fb923c] truncate">Cloud / AWS</span>
+                    <div className="flex-1 h-6 bg-[#1a1a1a] rounded-lg p-0.5 relative overflow-hidden flex items-center">
+                      <div className="h-full bg-[#fb923c] rounded-md flex items-center justify-end px-2 text-[10px] font-black text-[#050505]" style={{ width: "45%" }}>
+                        GAP
                       </div>
                     </div>
                   </div>
                 </div>
 
-                {/* Score Breakdown Metrics Grid */}
-                <div className="grid grid-cols-3 gap-2.5 text-center">
-                  <div className="bg-slate-900/60 border border-white/5 rounded-xl p-2.5">
-                    <div className="text-lg font-extrabold text-cyan-400">91%</div>
-                    <div className="text-[10px] font-semibold text-slate-400">Skills Match</div>
+                {/* Legend indicator dots like reference bottom right */}
+                <div className="pt-2 border-t border-[#1c1c1c] flex items-center justify-between text-[10px] text-[#737373] font-bold uppercase tracking-wider">
+                  <div className="flex items-center gap-4">
+                    <span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-full bg-[#bbf451]" /> Matched</span>
+                    <span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-full bg-[#fb923c]" /> Gap</span>
+                    <span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-full bg-white" /> Semantic</span>
                   </div>
-                  <div className="bg-slate-900/60 border border-white/5 rounded-xl p-2.5">
-                    <div className="text-lg font-extrabold text-purple-400">78%</div>
-                    <div className="text-[10px] font-semibold text-slate-400">Keywords</div>
-                  </div>
-                  <div className="bg-slate-900/60 border border-white/5 rounded-xl p-2.5">
-                    <div className="text-lg font-extrabold text-emerald-400">86%</div>
-                    <div className="text-[10px] font-semibold text-slate-400">Semantics</div>
-                  </div>
+                  <span className="font-mono text-[#888888]">TOTAL FACTORS: 6</span>
                 </div>
+              </div>
 
-                {/* Skill Pills preview */}
-                <div className="space-y-2 pt-1">
-                  <div className="flex items-center justify-between text-xs font-semibold text-slate-300">
-                    <span>Key Matched Skills:</span>
-                    <span className="text-[11px] text-emerald-400 font-bold">5 Matched</span>
-                  </div>
-                  <div className="flex flex-wrap gap-1.5">
-                    <span className="inline-flex items-center gap-1 text-[11px] font-semibold bg-emerald-500/10 text-emerald-300 border border-emerald-500/30 px-2 py-0.5 rounded-md">
-                      <CheckCircle2 className="h-3 w-3 text-emerald-400" /> React 19
-                    </span>
-                    <span className="inline-flex items-center gap-1 text-[11px] font-semibold bg-emerald-500/10 text-emerald-300 border border-emerald-500/30 px-2 py-0.5 rounded-md">
-                      <CheckCircle2 className="h-3 w-3 text-emerald-400" /> TypeScript
-                    </span>
-                    <span className="inline-flex items-center gap-1 text-[11px] font-semibold bg-emerald-500/10 text-emerald-300 border border-emerald-500/30 px-2 py-0.5 rounded-md">
-                      <CheckCircle2 className="h-3 w-3 text-emerald-400" /> FastAPI
-                    </span>
-                    <span className="inline-flex items-center gap-1 text-[11px] font-semibold bg-emerald-500/10 text-emerald-300 border border-emerald-500/30 px-2 py-0.5 rounded-md">
-                      <CheckCircle2 className="h-3 w-3 text-emerald-400" /> PostgreSQL
-                    </span>
-                    <span className="inline-flex items-center gap-1 text-[11px] font-semibold bg-rose-500/10 text-rose-300 border border-rose-500/30 px-2 py-0.5 rounded-md">
-                      <AlertCircle className="h-3 w-3 text-rose-400" /> AWS Lambda
-                    </span>
-                  </div>
-                </div>
-
-                {/* Small preview footer */}
-                <div className="text-[11px] text-center text-slate-400 pt-2 border-t border-white/10 flex items-center justify-center gap-1.5">
-                  <Sparkles className="w-3 h-3 text-cyan-400" />
-                  <span>Real-time deterministic + AI evaluation preview</span>
-                </div>
+              {/* Bottom Console Status Footnote */}
+              <div className="flex items-center justify-between text-[11px] text-[#666666] pt-1">
+                <span>Deterministic Scoring + Gemini NLP</span>
+                <span className="text-[#bbf451] font-mono">LATENCY: ~1.2s</span>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Feature Section with 4 Modern Glass Cards */}
-      <section className="py-24 px-4 sm:px-6 bg-slate-950/60 border-y border-white/10 relative">
-        <div className="max-w-7xl mx-auto">
+      {/* Feature Section: 4 Structured Dark Editorial Cards */}
+      <section className="py-20 px-4 sm:px-6 bg-[#0a0a0a] border-y border-[#1a1a1a] relative">
+        <div className="max-w-7xl mx-auto space-y-12">
           {/* Section Header */}
-          <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-            <Badge variant="cyan" className="font-bold text-xs uppercase tracking-wider">
-              Engineered For High-Impact Careers
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-              A complete AI suite for modern job applications.
+          <div className="text-center max-w-3xl mx-auto space-y-3">
+            <span className="text-[11px] font-extrabold uppercase tracking-widest text-[#bbf451]">
+              ANALYTICAL SUITE
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-black uppercase tracking-tight text-white">
+              A Complete System for Career Compatibility.
             </h2>
-            <p className="text-slate-400 text-base sm:text-lg leading-relaxed">
-              We combine deterministic rule-based algorithms with cutting-edge semantic NLP embeddings and Gemini AI coaching to give you the most accurate feedback possible.
+            <p className="text-sm sm:text-base text-[#888888] leading-relaxed">
+              We combine rule-based deterministic scoring with TF-IDF cosine similarity and Gemini AI coaching for maximum hiring visibility.
             </p>
           </div>
 
           {/* 4 Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
             {/* Card 1: ATS Analysis */}
-            <div className="rounded-2xl border border-white/10 bg-slate-900/60 backdrop-blur-xl p-6 md:p-7 hover:border-cyan-500/50 hover:shadow-xl hover:shadow-cyan-500/10 hover:-translate-y-1 transition-all duration-300 group">
-              <div className="h-12 w-12 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:bg-cyan-500 group-hover:text-slate-950 transition-all shadow-sm">
-                <Target className="h-6 w-6" />
+            <div className="rounded-2xl border border-[#222222] bg-[#111111] p-6 hover:border-[#383838] hover:bg-[#141414] transition-all space-y-4">
+              <div className="h-10 w-10 rounded-xl bg-[#181818] border border-[#2c2c2c] text-[#bbf451] flex items-center justify-center font-bold">
+                <Target className="h-5 w-5" />
               </div>
-              <h3 className="text-lg font-bold text-white mb-2">AI Resume Analysis</h3>
-              <p className="text-sm text-slate-400 leading-relaxed">
-                Evaluates experience, education, and required competencies against applicant tracking system standards with transparent scoring breakdowns.
+              <h3 className="text-base font-extrabold uppercase tracking-wide text-white">ATS Matching</h3>
+              <p className="text-xs text-[#888888] leading-relaxed">
+                Deterministic matching of extracted competencies against job criteria with transparent 6-factor score breakdowns.
               </p>
             </div>
 
             {/* Card 2: Skill Matching */}
-            <div className="rounded-2xl border border-white/10 bg-slate-900/60 backdrop-blur-xl p-6 md:p-7 hover:border-emerald-500/50 hover:shadow-xl hover:shadow-emerald-500/10 hover:-translate-y-1 transition-all duration-300 group">
-              <div className="h-12 w-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:bg-emerald-500 group-hover:text-slate-950 transition-all shadow-sm">
-                <FileSearch className="h-6 w-6" />
+            <div className="rounded-2xl border border-[#222222] bg-[#111111] p-6 hover:border-[#383838] hover:bg-[#141414] transition-all space-y-4">
+              <div className="h-10 w-10 rounded-xl bg-[#181818] border border-[#2c2c2c] text-[#bbf451] flex items-center justify-center font-bold">
+                <FileSearch className="h-5 w-5" />
               </div>
-              <h3 className="text-lg font-bold text-white mb-2">Smart Rewriter</h3>
-              <p className="text-sm text-slate-400 leading-relaxed">
-                Transforms weak resume bullet points into high-impact, quantified achievement statements while strictly preserving truthful experience.
+              <h3 className="text-base font-extrabold uppercase tracking-wide text-white">Smart Rewriter</h3>
+              <p className="text-xs text-[#888888] leading-relaxed">
+                Transform weak bullet points into high-impact, quantified achievement statements while strictly preserving truthful experience.
               </p>
             </div>
 
             {/* Card 3: Interview Prep */}
-            <div className="rounded-2xl border border-white/10 bg-slate-900/60 backdrop-blur-xl p-6 md:p-7 hover:border-purple-500/50 hover:shadow-xl hover:shadow-purple-500/10 hover:-translate-y-1 transition-all duration-300 group">
-              <div className="h-12 w-12 rounded-xl bg-purple-500/10 border border-purple-500/30 text-purple-300 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:bg-purple-500 group-hover:text-white transition-all shadow-sm">
-                <MessagesSquare className="h-6 w-6" />
+            <div className="rounded-2xl border border-[#222222] bg-[#111111] p-6 hover:border-[#383838] hover:bg-[#141414] transition-all space-y-4">
+              <div className="h-10 w-10 rounded-xl bg-[#181818] border border-[#2c2c2c] text-[#fb923c] flex items-center justify-center font-bold">
+                <MessagesSquare className="h-5 w-5" />
               </div>
-              <h3 className="text-lg font-bold text-white mb-2">Interview Prep</h3>
-              <p className="text-sm text-slate-400 leading-relaxed">
-                Generates personalized technical and behavioral interview questions tailored directly to your resume gaps and the job posting.
+              <h3 className="text-base font-extrabold uppercase tracking-wide text-white">Interview Prep</h3>
+              <p className="text-xs text-[#888888] leading-relaxed">
+                Simulate role-specific technical, behavioral, and resume-gap interview questions tailored directly to the target opportunity.
               </p>
             </div>
 
             {/* Card 4: Track Progress */}
-            <div className="rounded-2xl border border-white/10 bg-slate-900/60 backdrop-blur-xl p-6 md:p-7 hover:border-indigo-500/50 hover:shadow-xl hover:shadow-indigo-500/10 hover:-translate-y-1 transition-all duration-300 group">
-              <div className="h-12 w-12 rounded-xl bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:bg-indigo-500 group-hover:text-white transition-all shadow-sm">
-                <TrendingUp className="h-6 w-6" />
+            <div className="rounded-2xl border border-[#222222] bg-[#111111] p-6 hover:border-[#383838] hover:bg-[#141414] transition-all space-y-4">
+              <div className="h-10 w-10 rounded-xl bg-[#181818] border border-[#2c2c2c] text-white flex items-center justify-center font-bold">
+                <TrendingUp className="h-5 w-5" />
               </div>
-              <h3 className="text-lg font-bold text-white mb-2">Track Your Progress</h3>
-              <p className="text-sm text-slate-400 leading-relaxed">
-                Save and compare resume iterations over time. Monitor score improvements and measure compatibility across multiple job opportunities.
+              <h3 className="text-base font-extrabold uppercase tracking-wide text-white">Audit History</h3>
+              <p className="text-xs text-[#888888] leading-relaxed">
+                Save and compare resume iterations over time. Monitor compatibility scores across multiple companies and roles.
               </p>
             </div>
           </div>
@@ -263,55 +265,52 @@ export default function LandingPage() {
       </section>
 
       {/* How It Works Section: 3-Step Flow */}
-      <section className="py-24 px-4 sm:px-6 relative">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
-            <h2 className="text-3xl font-extrabold text-white tracking-tight">How it works in 3 simple steps</h2>
-            <p className="text-slate-400 text-base">
-              Get comprehensive career analysis and recommendations in less than 30 seconds.
+      <section className="py-20 px-4 sm:px-6 relative">
+        <div className="max-w-6xl mx-auto space-y-12">
+          <div className="text-center max-w-2xl mx-auto space-y-2">
+            <span className="text-[11px] font-extrabold uppercase tracking-widest text-[#bbf451]">
+              EXECUTION WORKFLOW
+            </span>
+            <h2 className="text-3xl font-black uppercase tracking-tight text-white">How It Works in 3 Steps</h2>
+            <p className="text-xs sm:text-sm text-[#888888]">
+              Comprehensive career compatibility diagnostics in under 30 seconds.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 relative">
+          <div className="grid md:grid-cols-3 gap-6">
             {/* Step 1 */}
-            <div className="bg-slate-900/60 backdrop-blur-xl rounded-2xl p-8 border border-white/10 shadow-xl relative flex flex-col items-center text-center space-y-4 hover:border-cyan-500/40 transition-all">
-              <div className="h-14 w-14 rounded-2xl bg-gradient-to-tr from-cyan-500 to-blue-600 text-slate-950 font-extrabold text-lg flex items-center justify-center shadow-lg shadow-cyan-500/20">
-                01
+            <div className="bg-[#111111] rounded-2xl p-7 border border-[#222222] space-y-4">
+              <div className="flex items-center justify-between">
+                <span className="text-2xl font-black text-[#bbf451]">01</span>
+                <Upload className="h-5 w-5 text-[#888888]" />
               </div>
-              <div className="h-10 w-10 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-300 flex items-center justify-center">
-                <Upload className="h-5 w-5" />
-              </div>
-              <h3 className="text-xl font-bold text-white">Upload Your Resume</h3>
-              <p className="text-sm text-slate-400 leading-relaxed">
-                Upload your resume in PDF or DOCX format. Our parsers cleanly extract structure, experience, and competencies.
+              <h3 className="text-base font-extrabold uppercase tracking-wide text-white">Upload Resume</h3>
+              <p className="text-xs text-[#888888] leading-relaxed">
+                Upload your resume in PDF or DOCX format. Our parser extracts experience, projects, education, and technical competencies.
               </p>
             </div>
 
             {/* Step 2 */}
-            <div className="bg-slate-900/60 backdrop-blur-xl rounded-2xl p-8 border border-white/10 shadow-xl relative flex flex-col items-center text-center space-y-4 hover:border-purple-500/40 transition-all">
-              <div className="h-14 w-14 rounded-2xl bg-gradient-to-tr from-purple-600 to-indigo-600 text-white font-extrabold text-lg flex items-center justify-center shadow-lg shadow-purple-500/20">
-                02
+            <div className="bg-[#111111] rounded-2xl p-7 border border-[#222222] space-y-4">
+              <div className="flex items-center justify-between">
+                <span className="text-2xl font-black text-[#fb923c]">02</span>
+                <FileText className="h-5 w-5 text-[#888888]" />
               </div>
-              <div className="h-10 w-10 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 flex items-center justify-center">
-                <FileText className="h-5 w-5" />
-              </div>
-              <h3 className="text-xl font-bold text-white">Paste Job Description</h3>
-              <p className="text-sm text-slate-400 leading-relaxed">
-                Paste the target job description or requirements. Our system extracts core responsibilities and keywords.
+              <h3 className="text-base font-extrabold uppercase tracking-wide text-white">Input Job Description</h3>
+              <p className="text-xs text-[#888888] leading-relaxed">
+                Paste the target job description. The parser automatically segments mandatory required skills from preferred competencies.
               </p>
             </div>
 
             {/* Step 3 */}
-            <div className="bg-slate-900/60 backdrop-blur-xl rounded-2xl p-8 border border-white/10 shadow-xl relative flex flex-col items-center text-center space-y-4 hover:border-emerald-500/40 transition-all">
-              <div className="h-14 w-14 rounded-2xl bg-gradient-to-tr from-emerald-500 to-cyan-500 text-slate-950 font-extrabold text-lg flex items-center justify-center shadow-lg shadow-emerald-500/20">
-                03
+            <div className="bg-[#111111] rounded-2xl p-7 border border-[#222222] space-y-4">
+              <div className="flex items-center justify-between">
+                <span className="text-2xl font-black text-white">03</span>
+                <Sparkles className="h-5 w-5 text-[#888888]" />
               </div>
-              <div className="h-10 w-10 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 flex items-center justify-center">
-                <Sparkles className="h-5 w-5" />
-              </div>
-              <h3 className="text-xl font-bold text-white">Get AI-Powered Analysis</h3>
-              <p className="text-sm text-slate-400 leading-relaxed">
-                Instantly view ATS scores, semantic relevance graphs, missing skills, bullet revisions, and interview prompts.
+              <h3 className="text-base font-extrabold uppercase tracking-wide text-white">Run Diagnostic Audit</h3>
+              <p className="text-xs text-[#888888] leading-relaxed">
+                Receive the complete score breakdown, missing keyword report, semantic relevance matrix, and AI coaching suggestions.
               </p>
             </div>
           </div>
@@ -319,19 +318,19 @@ export default function LandingPage() {
       </section>
 
       {/* Bottom CTA Banner */}
-      <section className="py-16 px-4 sm:px-6 max-w-6xl mx-auto w-full mb-12">
-        <div className="rounded-3xl bg-gradient-to-r from-cyan-950/40 via-slate-900/90 to-purple-950/40 border border-cyan-500/30 p-8 sm:p-12 text-white shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8 backdrop-blur-xl">
-          <div className="space-y-3 max-w-xl text-center md:text-left">
-            <h3 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
-              Ready to optimize your resume for your dream role?
+      <section className="py-12 px-4 sm:px-6 max-w-6xl mx-auto w-full mb-10">
+        <div className="rounded-3xl bg-[#111111] border border-[#262626] p-8 sm:p-10 text-white flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="space-y-2 text-center md:text-left">
+            <h3 className="text-2xl font-extrabold uppercase tracking-tight">
+              Ready to calibrate your resume?
             </h3>
-            <p className="text-sm sm:text-base text-slate-400">
-              Transform your job search with automated ATS audits and precision AI coaching.
+            <p className="text-xs sm:text-sm text-[#888888]">
+              Automated ATS audits, deterministic skill classification, and precision AI coaching.
             </p>
           </div>
-          <Button size="lg" asChild className="font-bold shadow-xl shrink-0">
+          <Button size="lg" asChild className="font-bold text-xs uppercase tracking-wider px-7 shrink-0">
             <Link to="/analyze">
-              Get Started Now <ArrowRight className="ml-2 h-5 w-5" />
+              Launch Diagnostic Scan <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </Button>
         </div>

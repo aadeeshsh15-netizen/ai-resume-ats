@@ -9,23 +9,29 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-gradient-to-r from-cyan-500 via-indigo-600 to-purple-600 hover:from-cyan-400 hover:via-indigo-500 hover:to-purple-500 text-white shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/35 border border-cyan-400/30",
+          "bg-[#bbf451] hover:bg-[#a8eb38] text-[#050505] font-bold border border-[#bbf451]/40 shadow-sm hover:shadow-[#bbf451]/20",
+        lime:
+          "bg-[#bbf451] hover:bg-[#a8eb38] text-[#050505] font-bold border border-[#bbf451]/40 shadow-sm",
+        orange:
+          "bg-[#fb923c] hover:bg-[#f97316] text-[#050505] font-bold border border-[#fb923c]/40 shadow-sm",
+        white:
+          "bg-white hover:bg-[#f0f0f0] text-[#050505] font-bold border border-white/80 shadow-sm",
         gradient:
-          "bg-gradient-to-r from-purple-600 via-pink-600 to-rose-600 hover:from-purple-500 hover:via-pink-500 hover:to-rose-500 text-white shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 border border-purple-400/30",
+          "bg-[#bbf451] hover:bg-[#a8eb38] text-[#050505] font-bold border border-[#bbf451]/40 shadow-sm",
         cyan:
-          "bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/45 border border-cyan-300/40",
+          "bg-[#bbf451] hover:bg-[#a8eb38] text-[#050505] font-bold border border-[#bbf451]/40 shadow-sm",
         destructive:
-          "bg-gradient-to-r from-rose-600 to-red-600 hover:from-rose-500 hover:to-red-500 text-white shadow-lg shadow-rose-500/20 hover:shadow-rose-500/35 border border-rose-500/30",
+          "bg-red-600 hover:bg-red-500 text-white font-bold border border-red-500/30 shadow-sm",
         outline:
-          "border border-white/15 bg-white/5 backdrop-blur-md text-slate-200 hover:bg-white/10 hover:text-white hover:border-cyan-500/50 shadow-sm",
+          "border border-[#2a2a2a] bg-[#141414] text-[#f5f5f5] hover:bg-[#1c1c1c] hover:border-[#3d3d3d] shadow-xs",
         secondary:
-          "bg-slate-800/80 text-slate-200 hover:bg-slate-700/80 border border-white/10 shadow-xs",
+          "bg-[#1e1e1e] text-[#f5f5f5] hover:bg-[#282828] border border-[#2e2e2e] shadow-xs",
         ghost:
-          "text-slate-400 hover:bg-white/5 hover:text-slate-100",
+          "text-[#888888] hover:bg-[#1a1a1a] hover:text-[#f5f5f5]",
         link:
-          "text-cyan-400 underline-offset-4 hover:underline p-0 h-auto font-medium active:scale-100",
+          "text-[#bbf451] underline-offset-4 hover:underline p-0 h-auto font-medium active:scale-100",
         glass:
-          "bg-slate-900/60 backdrop-blur-xl border border-white/15 text-slate-200 hover:bg-slate-800/70 hover:border-cyan-500/40 shadow-lg shadow-black/20",
+          "bg-[#161616] border border-[#2a2a2a] text-[#f5f5f5] hover:bg-[#202020] hover:border-[#383838] shadow-xs",
       },
       size: {
         default: "h-10 px-5 py-2",

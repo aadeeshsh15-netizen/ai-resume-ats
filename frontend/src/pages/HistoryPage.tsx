@@ -86,24 +86,24 @@ export default function HistoryPage() {
 
   if (!token) {
     return (
-      <div className="container mx-auto px-4 sm:px-6 py-16 max-w-4xl min-h-[75vh] flex flex-col justify-center items-center text-center text-slate-100">
-        <div className="w-16 h-16 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-300 mb-6 shadow-lg shadow-cyan-500/10">
-          <Clock className="w-8 h-8" />
+      <div className="container mx-auto px-4 sm:px-6 py-20 max-w-2xl min-h-[75vh] flex flex-col justify-center items-center text-center text-[#f5f5f5]">
+        <div className="w-14 h-14 rounded-xl bg-[#141414] border border-[#262626] flex items-center justify-center text-[#bbf451] mb-6 shadow-sm">
+          <Clock className="w-6 h-6" />
         </div>
-        <Badge variant="cyan" className="mb-3 font-bold uppercase tracking-wider">
-          Account Required
+        <Badge variant="lime" className="mb-4 font-mono font-bold uppercase tracking-wider text-[11px]">
+          Authentication Required
         </Badge>
-        <h1 className="text-3xl font-extrabold text-white tracking-tight mb-3">
+        <h1 className="text-3xl font-extrabold text-[#f5f5f5] tracking-tight mb-3">
           Analysis History & Cloud Sync
         </h1>
-        <p className="text-slate-400 mb-8 max-w-md text-sm sm:text-base leading-relaxed">
+        <p className="text-[#8e8e8e] mb-8 max-w-md text-sm leading-relaxed">
           Sign in to your account to automatically save your resume analyses, track ATS compatibility over time, and access previous reports.
         </p>
-        <div className="flex gap-4">
-          <Button asChild size="lg" className="font-bold shadow-lg shadow-cyan-500/25">
+        <div className="flex flex-wrap gap-3 justify-center">
+          <Button asChild size="default" variant="default" className="font-bold px-6">
             <Link to="/login">Sign In to View History</Link>
           </Button>
-          <Button asChild variant="outline" size="lg" className="font-bold">
+          <Button asChild variant="outline" size="default" className="font-semibold px-6 border-[#262626] text-[#d4d4d4] hover:text-white">
             <Link to="/register">Create Free Account</Link>
           </Button>
         </div>
@@ -112,24 +112,24 @@ export default function HistoryPage() {
   }
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 py-10 max-w-5xl text-slate-100">
+    <div className="container mx-auto px-4 sm:px-6 py-10 max-w-5xl text-[#f5f5f5]">
       {/* Top Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+      <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4 border-b border-[#222222] pb-6">
         <div>
-          <div className="flex items-center gap-2">
-            <h1 className="text-3xl font-extrabold text-white tracking-tight">
+          <div className="flex items-center gap-2.5">
+            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#f5f5f5]">
               Analysis History
             </h1>
-            <Badge variant="secondary" className="font-bold text-xs">
+            <Badge variant="secondary" className="font-mono font-bold text-xs bg-[#161616] border-[#2a2a2a] text-[#a3a3a3]">
               {analyses.length} {analyses.length === 1 ? 'Scan' : 'Scans'}
             </Badge>
           </div>
-          <p className="text-slate-400 text-sm mt-1">
+          <p className="text-[#737373] text-xs sm:text-sm mt-1">
             Access, review, and manage your previous resume compatibility scans.
           </p>
         </div>
 
-        <Button asChild className="font-bold self-start md:self-auto shadow-lg shadow-cyan-500/20">
+        <Button asChild variant="default" className="font-bold self-start md:self-auto">
           <Link to="/analyze" className="gap-2">
             <Plus className="w-4 h-4" />
             New Analysis
@@ -140,102 +140,102 @@ export default function HistoryPage() {
       {/* Search & Filter Bar */}
       {analyses.length > 0 && (
         <div className="mb-6 relative">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-[#737373]" />
           <Input 
             type="text"
             placeholder="Search by job title or role keyword..." 
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-10 h-11"
+            className="pl-10 h-11 bg-[#111111] border-[#222222] text-[#f5f5f5] placeholder:text-[#525252] focus:border-[#bbf451]"
           />
         </div>
       )}
 
       {/* Content State */}
       {loading ? (
-        <div className="flex flex-col items-center justify-center p-16 space-y-3 text-slate-400">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-cyan-400" />
-          <p className="text-sm font-semibold">Loading analysis records...</p>
+        <div className="flex flex-col items-center justify-center p-16 space-y-3 text-[#737373]">
+          <div className="animate-spin rounded-full h-7 w-7 border-b-2 border-[#bbf451]" />
+          <p className="text-xs font-mono uppercase tracking-wider">Loading analysis records...</p>
         </div>
       ) : error ? (
-        <div className="bg-rose-500/10 border border-rose-500/30 text-rose-300 p-4 rounded-2xl text-sm font-medium">
+        <div className="bg-[#16120e] border border-[#fb923c]/30 text-[#fb923c] p-4 rounded-xl text-xs font-medium">
           {error}
         </div>
       ) : analyses.length === 0 ? (
-        <div className="bg-[#090d1a]/90 border-2 border-dashed border-white/10 rounded-3xl p-12 sm:p-16 text-center max-w-lg mx-auto shadow-2xl backdrop-blur-2xl">
-          <div className="h-16 w-16 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-300 mx-auto mb-5 shadow-lg shadow-cyan-500/20">
-            <Sparkles className="w-8 h-8" />
+        <div className="bg-[#111111] border border-[#222222] rounded-2xl p-12 sm:p-16 text-center max-w-lg mx-auto">
+          <div className="h-14 w-14 rounded-xl bg-[#161616] border border-[#2a2a2a] flex items-center justify-center text-[#bbf451] mx-auto mb-5">
+            <Sparkles className="w-7 h-7" />
           </div>
-          <h3 className="text-lg font-bold text-white mb-1.5">No analyses recorded yet</h3>
-          <p className="text-xs sm:text-sm text-slate-400 mb-6 leading-relaxed">
+          <h3 className="text-base font-bold text-[#f5f5f5] mb-1.5">No analyses recorded yet</h3>
+          <p className="text-xs text-[#737373] mb-6 leading-relaxed">
             Run your first resume scan against a job description to start building your career improvement history.
           </p>
-          <Button asChild size="lg" className="font-bold shadow-lg shadow-cyan-500/25">
+          <Button asChild variant="default" className="font-bold">
             <Link to="/analyze">Run First Analysis <ArrowRight className="w-4 h-4 ml-1.5" /></Link>
           </Button>
         </div>
       ) : filteredAnalyses.length === 0 ? (
-        <div className="bg-slate-900/60 rounded-2xl p-10 text-center border border-white/10 text-slate-400 text-sm">
-          No records matching <span className="font-bold text-slate-200">"{searchQuery}"</span>.
+        <div className="bg-[#111111] rounded-xl p-10 text-center border border-[#222222] text-[#737373] text-xs">
+          No records matching <span className="font-bold text-[#f5f5f5]">"{searchQuery}"</span>.
         </div>
       ) : (
-        <div className="space-y-3.5">
+        <div className="space-y-3">
           {filteredAnalyses.map((analysis) => {
             const score = analysis.overall_score || 0
-            const scoreColor = score >= 80 
-              ? "text-emerald-300 bg-emerald-500/10 border-emerald-500/30" 
-              : score >= 60 
-              ? "text-cyan-300 bg-cyan-500/10 border-cyan-500/30" 
-              : "text-rose-300 bg-rose-500/10 border-rose-500/30"
+            const scoreStyle = score >= 75 
+              ? "text-[#bbf451] bg-[#12160f] border-[#bbf451]/30" 
+              : score >= 50 
+              ? "text-[#fb923c] bg-[#16120e] border-[#fb923c]/30" 
+              : "text-[#ef4444] bg-[#1a0f0f] border-[#ef4444]/30"
             
             return (
               <Card 
                 key={analysis.id} 
-                className="overflow-hidden hover:border-cyan-500/50 hover:shadow-xl hover:shadow-cyan-500/10 transition-all cursor-pointer group bg-[#090d1a]/90 backdrop-blur-2xl border-white/10"
+                className="overflow-hidden hover:border-[#383838] transition-all cursor-pointer group bg-[#111111] border-[#222222]"
                 onClick={() => handleOpen(analysis.id)}
               >
                 <CardContent className="p-0">
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between p-5 gap-4">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between p-4 sm:p-5 gap-4">
                     
                     {/* Left details */}
                     <div className="flex items-center gap-4 min-w-0">
-                      <div className={`h-13 w-13 rounded-2xl border flex flex-col items-center justify-center shrink-0 font-black shadow-inner ${scoreColor}`}>
-                        <span className="text-lg leading-none">{score}</span>
-                        <span className="text-[9px] uppercase tracking-tighter opacity-80 mt-0.5">Score</span>
+                      <div className={`h-12 w-12 rounded-xl border flex flex-col items-center justify-center shrink-0 font-black font-mono shadow-inner ${scoreStyle}`}>
+                        <span className="text-base leading-none">{score}</span>
+                        <span className="text-[8px] uppercase tracking-wider opacity-70 mt-0.5">Score</span>
                       </div>
 
                       <div className="min-w-0">
-                        <h3 className="font-bold text-base text-slate-100 group-hover:text-cyan-300 transition-colors truncate">
+                        <h3 className="font-bold text-sm sm:text-base text-[#f5f5f5] group-hover:text-[#bbf451] transition-colors truncate">
                           {analysis.job_title || "Unknown Position"}
                         </h3>
-                        <div className="flex items-center gap-3 mt-1 text-xs text-slate-400 font-medium">
+                        <div className="flex items-center gap-3 mt-1 text-xs text-[#737373]">
                           <span className="flex items-center gap-1">
-                            <Calendar className="w-3.5 h-3.5 text-slate-500" />
+                            <Calendar className="w-3.5 h-3.5 text-[#525252]" />
                             {new Date(analysis.created_at).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}
                           </span>
                           <span>•</span>
-                          <span className="text-emerald-400 font-semibold flex items-center gap-0.5">
-                            <ShieldCheck className="w-3.5 h-3.5" /> Full Audit Saved
+                          <span className="text-[#a3a3a3] font-medium flex items-center gap-1">
+                            <ShieldCheck className="w-3.5 h-3.5 text-[#bbf451]" /> Full Audit Saved
                           </span>
                         </div>
                       </div>
                     </div>
                     
                     {/* Right actions */}
-                    <div className="flex items-center gap-2 sm:border-l sm:border-white/10 sm:pl-6 shrink-0 justify-end">
+                    <div className="flex items-center gap-2 sm:border-l sm:border-[#222222] sm:pl-5 shrink-0 justify-end">
                       <Button 
                         variant="ghost" 
                         size="icon" 
-                        className="text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 rounded-xl" 
+                        className="text-[#737373] hover:text-[#fb923c] hover:bg-[#16120e] rounded-lg" 
                         onClick={(e) => handleDelete(analysis.id, e)}
                         title="Delete record"
                       >
                         <Trash2 className="w-4 h-4" />
                       </Button>
                       <Button 
-                        variant="secondary" 
+                        variant="outline" 
                         size="sm"
-                        className="font-bold rounded-xl text-xs group-hover:bg-cyan-500 group-hover:text-slate-950 transition-colors"
+                        className="font-semibold text-xs border-[#262626] bg-[#161616] text-[#d4d4d4] group-hover:bg-[#bbf451] group-hover:text-black group-hover:border-[#bbf451] transition-all"
                       >
                         View Report
                         <ArrowRight className="w-3.5 h-3.5 ml-1.5" />

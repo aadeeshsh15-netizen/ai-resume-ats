@@ -328,52 +328,54 @@ export default function ResultsPage() {
   }
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 py-8 max-w-7xl text-slate-100">
+    <div className="container mx-auto px-4 sm:px-6 py-8 max-w-7xl text-[#f5f5f5]">
       {/* Top Navigation & Role Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 bg-[#090d1a]/80 border border-white/10 rounded-2xl p-4 sm:p-6 backdrop-blur-xl shadow-xl">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 bg-[#111111] border border-[#222222] rounded-2xl p-4 sm:p-5 shadow-lg">
         <div className="flex items-center gap-4">
-          <Button variant="outline" size="icon" asChild className="rounded-xl shrink-0">
+          <Button variant="outline" size="icon" asChild className="rounded-xl shrink-0 h-9 w-9 border-[#2a2a2a] bg-[#161616]">
             <Link to="/analyze" title="Back to Analyzer">
-              <ArrowLeft className="h-5 w-5" />
+              <ArrowLeft className="h-4 w-4 text-[#888888]" />
             </Link>
           </Button>
           <div>
             <div className="flex items-center gap-2.5 flex-wrap">
-              <h1 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight">
-                Resume Diagnostic Report
+              <h1 className="text-lg sm:text-xl font-black uppercase tracking-tight text-white">
+                {matchData.job_description_data?.job_title || "Target Position"}
               </h1>
-              <Badge variant="cyan" className="text-xs font-bold">
-                Evaluation Complete
-              </Badge>
+              <span className="text-[10px] font-black uppercase tracking-wider bg-[#bbf451]/15 text-[#bbf451] border border-[#bbf451]/30 px-2.5 py-0.5 rounded-full">
+                ANALYSIS COMPLETE
+              </span>
             </div>
-            <p className="text-xs sm:text-sm text-slate-400 mt-0.5 font-medium">
-              Target Role: <span className="font-bold text-cyan-300">{matchData.job_description_data?.job_title || "Target Position"}</span>
+            <p className="text-[11px] text-[#737373] mt-0.5 font-medium flex items-center gap-2">
+              <span>CANDIDATE: <strong className="text-[#c0c0c0] font-mono">{matchData.resume_data?.filename || "Resume_Parsed.pdf"}</strong></span>
+              <span>•</span>
+              <span className="text-[#555555]">CALIBRATED ATS EVALUATION</span>
             </p>
           </div>
         </div>
 
-        <div className="flex items-center gap-3 self-end sm:self-center">
+        <div className="flex items-center gap-2.5 self-end sm:self-center">
           <Button 
             variant="outline" 
             size="sm" 
             onClick={() => window.print()}
-            className="font-semibold text-xs"
+            className="font-bold text-xs uppercase tracking-wider border-[#2a2a2a] bg-[#161616]"
           >
-            <Download className="mr-1.5 h-4 w-4 text-slate-400" /> Export PDF
+            <Download className="mr-1.5 h-3.5 w-3.5 text-[#888888]" /> Export
           </Button>
           <Button 
             variant="default" 
             size="sm" 
             onClick={() => handleCopy(window.location.href, 'share')}
-            className="font-semibold text-xs"
+            className="font-bold text-xs uppercase tracking-wider"
           >
             {copiedField === 'share' ? (
               <>
-                <Check className="mr-1.5 h-4 w-4 text-emerald-300" /> Copied Link
+                <Check className="mr-1.5 h-3.5 w-3.5 text-[#050505]" /> Copied
               </>
             ) : (
               <>
-                <Share2 className="mr-1.5 h-4 w-4" /> Share
+                <Share2 className="mr-1.5 h-3.5 w-3.5" /> Share
               </>
             )}
           </Button>
@@ -381,225 +383,218 @@ export default function ResultsPage() {
       </div>
 
       {/* Main Dashboard Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         {/* Left Column: Overall Score Card & Radar Chart (4 cols) */}
         <div className="lg:col-span-4 space-y-6">
           {/* Main Compatibility Score Card */}
-          <Card className="border-white/10 shadow-2xl relative overflow-hidden bg-[#090d1a]/90 backdrop-blur-2xl">
-            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 via-indigo-500 to-purple-500" />
-            <CardHeader className="text-center pb-2">
-              <CardTitle className="text-lg font-bold text-white">
-                ATS Compatibility Score
-              </CardTitle>
-              <CardDescription className="text-xs text-slate-400">
-                Calibrated multi-factor compatibility evaluation
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="flex flex-col items-center pt-2">
+          <div className="rounded-2xl border border-[#222222] bg-[#111111] p-5 md:p-6 shadow-xl relative overflow-hidden">
+            <div className="text-center pb-2 border-b border-[#1c1c1c]">
+              <span className="text-[10px] font-black uppercase tracking-widest text-[#888888]">
+                CALIBRATED EVALUATION
+              </span>
+              <h3 className="text-base font-extrabold uppercase tracking-tight text-white mt-0.5">
+                ATS Compatibility Index
+              </h3>
+            </div>
+
+            <div className="flex flex-col items-center pt-3">
               {/* Large Circular Gauge */}
-              <div className="relative flex items-center justify-center w-44 h-44 my-2">
+              <div className="relative flex items-center justify-center w-40 h-40 my-2">
                 <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
-                  <circle cx="50" cy="50" r="42" fill="none" stroke="#1e293b" strokeWidth="9" />
+                  <circle cx="50" cy="50" r="42" fill="none" stroke="#1c1c1c" strokeWidth="9" />
                   <circle 
                     cx="50" cy="50" r="42" fill="none" 
-                    stroke={overallScore >= 75 ? "#10b981" : overallScore >= 60 ? "#06b6d4" : overallScore >= 45 ? "#f59e0b" : "#ef4444"} 
+                    stroke={overallScore >= 75 ? "#bbf451" : overallScore >= 60 ? "#ffffff" : overallScore >= 45 ? "#fb923c" : "#ef4444"} 
                     strokeWidth="9" 
                     strokeDasharray="263.89" 
                     strokeDashoffset={263.89 - (263.89 * overallScore) / 100} 
                     strokeLinecap="round" 
-                    className="transition-all duration-1000 ease-out drop-shadow-[0_0_8px_rgba(6,182,212,0.4)]"
+                    className="transition-all duration-1000 ease-out"
                   />
                 </svg>
                 <div className="absolute inset-0 flex flex-col items-center justify-center">
                   <span className="text-4xl font-black text-white tracking-tight">
                     {overallScore}
                   </span>
-                  <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">
+                  <span className="text-[10px] font-bold text-[#737373] uppercase tracking-wider">
                     out of 100
                   </span>
                 </div>
               </div>
 
               {/* Status Verdict Pill */}
-              <div className="mt-2 text-center">
-                <Badge 
-                  variant={overallScore >= 75 ? "success" : overallScore >= 60 ? "cyan" : overallScore >= 45 ? "warning" : "destructive"}
-                  className="px-3.5 py-1 text-xs font-bold uppercase tracking-wider shadow-sm"
-                >
+              <div className="mt-1 text-center">
+                <span className={`inline-block px-3.5 py-1 text-xs font-black uppercase tracking-wider rounded-full ${
+                  overallScore >= 75 ? "bg-[#bbf451] text-[#050505]" : overallScore >= 60 ? "bg-white text-[#050505]" : "bg-[#fb923c] text-[#050505]"
+                }`}>
                   {scoreLabel}
-                </Badge>
+                </span>
               </div>
 
               {/* Score Explanation Banner */}
               {matchData.explanation && (
-                <div className="mt-4 p-3 bg-slate-900/80 border border-white/10 rounded-xl text-left">
-                  <p className="text-xs text-slate-300 leading-relaxed font-medium">
+                <div className="mt-4 p-3 bg-[#161616] border border-[#262626] rounded-xl text-left w-full">
+                  <p className="text-[11px] text-[#a0a0a0] leading-relaxed font-normal">
                     {matchData.explanation}
                   </p>
                 </div>
               )}
 
-              {/* 6-Factor Score Breakdown */}
-              <div className="w-full grid grid-cols-3 gap-2 mt-5 pt-5 border-t border-white/10 text-center">
-                <div className="bg-slate-900/60 border border-white/5 rounded-xl p-2 shadow-inner">
-                  <div className="text-sm font-extrabold text-cyan-400">
+              {/* 6-Factor Score Breakdown (Reference product capsule style) */}
+              <div className="w-full grid grid-cols-3 gap-2 mt-4 pt-4 border-t border-[#1c1c1c] text-center">
+                <div className="bg-[#161616] border border-[#262626] rounded-xl p-2">
+                  <div className="text-sm font-black text-[#bbf451]">
                     {scoreBreakdown.required_skills}%
                   </div>
-                  <div className="text-[9px] font-bold text-slate-400 uppercase leading-tight mt-0.5">
-                    Req. Skills (40%)
+                  <div className="text-[9px] font-bold text-[#737373] uppercase leading-tight mt-0.5">
+                    Skills (40%)
                   </div>
                 </div>
-                <div className="bg-slate-900/60 border border-white/5 rounded-xl p-2 shadow-inner">
-                  <div className="text-sm font-extrabold text-purple-400">
+                <div className="bg-[#161616] border border-[#262626] rounded-xl p-2">
+                  <div className="text-sm font-black text-white">
                     {scoreBreakdown.semantic_relevance}%
                   </div>
-                  <div className="text-[9px] font-bold text-slate-400 uppercase leading-tight mt-0.5">
+                  <div className="text-[9px] font-bold text-[#737373] uppercase leading-tight mt-0.5">
                     Semantic (25%)
                   </div>
                 </div>
-                <div className="bg-slate-900/60 border border-white/5 rounded-xl p-2 shadow-inner">
-                  <div className="text-sm font-extrabold text-indigo-400">
+                <div className="bg-[#161616] border border-[#262626] rounded-xl p-2">
+                  <div className="text-sm font-black text-[#fb923c]">
                     {scoreBreakdown.keywords}%
                   </div>
-                  <div className="text-[9px] font-bold text-slate-400 uppercase leading-tight mt-0.5">
+                  <div className="text-[9px] font-bold text-[#737373] uppercase leading-tight mt-0.5">
                     Keywords (15%)
                   </div>
                 </div>
-                <div className="bg-slate-900/60 border border-white/5 rounded-xl p-2 shadow-inner">
-                  <div className="text-sm font-extrabold text-emerald-400">
+                <div className="bg-[#161616] border border-[#262626] rounded-xl p-2">
+                  <div className="text-sm font-black text-[#bbf451]">
                     {scoreBreakdown.experience_projects}%
                   </div>
-                  <div className="text-[9px] font-bold text-slate-400 uppercase leading-tight mt-0.5">
+                  <div className="text-[9px] font-bold text-[#737373] uppercase leading-tight mt-0.5">
                     Projects (10%)
                   </div>
                 </div>
-                <div className="bg-slate-900/60 border border-white/5 rounded-xl p-2 shadow-inner">
-                  <div className="text-sm font-extrabold text-amber-400">
+                <div className="bg-[#161616] border border-[#262626] rounded-xl p-2">
+                  <div className="text-sm font-black text-white">
                     {scoreBreakdown.education}%
                   </div>
-                  <div className="text-[9px] font-bold text-slate-400 uppercase leading-tight mt-0.5">
+                  <div className="text-[9px] font-bold text-[#737373] uppercase leading-tight mt-0.5">
                     Education (5%)
                   </div>
                 </div>
-                <div className="bg-slate-900/60 border border-white/5 rounded-xl p-2 shadow-inner">
-                  <div className="text-sm font-extrabold text-slate-300">
+                <div className="bg-[#161616] border border-[#262626] rounded-xl p-2">
+                  <div className="text-sm font-black text-[#888888]">
                     {scoreBreakdown.resume_quality}%
                   </div>
-                  <div className="text-[9px] font-bold text-slate-400 uppercase leading-tight mt-0.5">
+                  <div className="text-[9px] font-bold text-[#737373] uppercase leading-tight mt-0.5">
                     Quality (5%)
                   </div>
                 </div>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
 
           {/* Radar Dimension Chart */}
-          <Card className="border-white/10 shadow-xl bg-[#090d1a]/90 backdrop-blur-2xl">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-base font-bold text-white flex items-center justify-between">
-                <span>Dimensional Alignment</span>
-                <Layers className="w-4 h-4 text-cyan-400" />
-              </CardTitle>
-              <CardDescription className="text-xs text-slate-400">
-                Multi-factor candidate competency distribution
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="h-64 pt-0">
+          <div className="rounded-2xl border border-[#222222] bg-[#111111] p-5 shadow-xl">
+            <div className="flex items-center justify-between pb-3 border-b border-[#1c1c1c]">
+              <div>
+                <span className="text-[10px] font-black uppercase tracking-widest text-[#888888]">DIMENSIONAL MATRIX</span>
+                <h4 className="text-sm font-extrabold uppercase tracking-tight text-white">Competency Alignment</h4>
+              </div>
+              <Layers className="w-4 h-4 text-[#bbf451]" />
+            </div>
+            <div className="h-60 pt-2">
               <ResponsiveContainer width="100%" height="100%">
                 <RadarChart cx="50%" cy="50%" outerRadius="68%" data={radarData}>
-                  <PolarGrid stroke="#334155" />
-                  <PolarAngleAxis dataKey="subject" tick={{ fill: '#94a3b8', fontSize: 10, fontWeight: 600 }} />
+                  <PolarGrid stroke="#262626" />
+                  <PolarAngleAxis dataKey="subject" tick={{ fill: '#888888', fontSize: 10, fontWeight: 700 }} />
                   <PolarRadiusAxis angle={30} domain={[0, 100]} tick={false} axisLine={false} />
-                  <Radar name="Candidate Profile" dataKey="A" stroke="#06b6d4" fill="#06b6d4" fillOpacity={0.25} />
+                  <Radar name="Candidate Profile" dataKey="A" stroke="#bbf451" fill="#bbf451" fillOpacity={0.2} />
                 </RadarChart>
               </ResponsiveContainer>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         </div>
 
         {/* Right Column: Detailed Tabbed Workspace (8 cols) */}
         <div className="lg:col-span-8 space-y-6">
           <Tabs defaultValue="skills" className="w-full">
             {/* Navigation Tabs Bar */}
-            <TabsList className="grid grid-cols-3 sm:grid-cols-6 w-full p-1.5 bg-slate-900/80 rounded-2xl border border-white/10 shadow-inner backdrop-blur-xl h-auto gap-1">
-              <TabsTrigger value="skills" className="py-2.5 text-xs font-bold rounded-xl flex items-center justify-center gap-1.5">
-                <Target className="w-3.5 h-3.5" />
+            <TabsList className="grid grid-cols-3 sm:grid-cols-6 w-full p-1.5 bg-[#111111] rounded-2xl border border-[#222222] h-auto gap-1">
+              <TabsTrigger value="skills" className="py-2 text-xs font-bold uppercase rounded-xl flex items-center justify-center gap-1">
+                <Target className="w-3.5 h-3.5 text-[#bbf451]" />
                 <span>Skills</span>
               </TabsTrigger>
-              <TabsTrigger value="keywords" className="py-2.5 text-xs font-bold rounded-xl flex items-center justify-center gap-1.5">
-                <KeyRound className="w-3.5 h-3.5" />
+              <TabsTrigger value="keywords" className="py-2 text-xs font-bold uppercase rounded-xl flex items-center justify-center gap-1">
+                <KeyRound className="w-3.5 h-3.5 text-[#fb923c]" />
                 <span>Keywords</span>
               </TabsTrigger>
-              <TabsTrigger value="semantic" className="py-2.5 text-xs font-bold rounded-xl flex items-center justify-center gap-1.5">
-                <TrendingUp className="w-3.5 h-3.5" />
+              <TabsTrigger value="semantic" className="py-2 text-xs font-bold uppercase rounded-xl flex items-center justify-center gap-1">
+                <TrendingUp className="w-3.5 h-3.5 text-white" />
                 <span>Semantics</span>
               </TabsTrigger>
-              <TabsTrigger value="ai" className="py-2.5 text-xs font-bold rounded-xl flex items-center justify-center gap-1.5">
-                <BrainCircuit className="w-3.5 h-3.5" />
+              <TabsTrigger value="ai" className="py-2 text-xs font-bold uppercase rounded-xl flex items-center justify-center gap-1">
+                <BrainCircuit className="w-3.5 h-3.5 text-[#bbf451]" />
                 <span>AI Insights</span>
               </TabsTrigger>
-              <TabsTrigger value="rewrite" className="py-2.5 text-xs font-bold rounded-xl flex items-center justify-center gap-1.5">
-                <Wand2 className="w-3.5 h-3.5" />
+              <TabsTrigger value="rewrite" className="py-2 text-xs font-bold uppercase rounded-xl flex items-center justify-center gap-1">
+                <Wand2 className="w-3.5 h-3.5 text-[#fb923c]" />
                 <span>Rewriter</span>
               </TabsTrigger>
-              <TabsTrigger value="interview" className="py-2.5 text-xs font-bold rounded-xl flex items-center justify-center gap-1.5">
-                <MessagesSquare className="w-3.5 h-3.5" />
+              <TabsTrigger value="interview" className="py-2 text-xs font-bold uppercase rounded-xl flex items-center justify-center gap-1">
+                <MessagesSquare className="w-3.5 h-3.5 text-white" />
                 <span>Interview</span>
               </TabsTrigger>
             </TabsList>
 
             {/* TAB 1: SKILLS & REQUIREMENTS */}
             <TabsContent value="skills">
-              <Card className="border-white/10 shadow-xl bg-[#090d1a]/90 backdrop-blur-2xl">
-                <CardHeader>
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <CardTitle className="text-xl font-bold text-white">
-                        Requirements & Skill Match
-                      </CardTitle>
-                      <CardDescription className="text-xs text-slate-400">
-                        Deterministic matching of extracted competencies against job criteria
-                      </CardDescription>
-                    </div>
-                    <div className="flex items-center gap-2 flex-wrap">
-                      <Badge variant="cyan" className="text-xs font-bold">
-                        Required Match: {skillMatch.required_match_percentage ?? scoreBreakdown.required_skills}%
-                      </Badge>
-                      {(skillMatch.matched_preferred?.length > 0 || skillMatch.missing_preferred?.length > 0) && (
-                        <Badge variant="purple" className="text-xs font-bold">
-                          Preferred Match: {skillMatch.preferred_match_percentage ?? 0}%
-                        </Badge>
-                      )}
-                    </div>
+              <div className="rounded-2xl border border-[#222222] bg-[#111111] p-6 space-y-6">
+                <div className="flex items-center justify-between border-b border-[#1c1c1c] pb-4">
+                  <div>
+                    <span className="text-[10px] font-black uppercase tracking-widest text-[#bbf451]">AUDIT MATRIX</span>
+                    <h3 className="text-lg font-black uppercase tracking-tight text-white">Requirements & Skill Match</h3>
+                    <p className="text-xs text-[#737373]">Deterministic mapping of candidate skills against job criteria</p>
                   </div>
-                </CardHeader>
-                <CardContent className="space-y-6">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className="text-[10px] font-bold uppercase tracking-wider bg-[#bbf451]/15 text-[#bbf451] border border-[#bbf451]/30 px-2.5 py-1 rounded-md">
+                      Required: {skillMatch.required_match_percentage ?? scoreBreakdown.required_skills}%
+                    </span>
+                    {(skillMatch.matched_preferred?.length > 0 || skillMatch.missing_preferred?.length > 0) && (
+                      <span className="text-[10px] font-bold uppercase tracking-wider bg-[#fb923c]/15 text-[#fb923c] border border-[#fb923c]/30 px-2.5 py-1 rounded-md">
+                        Preferred: {skillMatch.preferred_match_percentage ?? 0}%
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                <div className="space-y-6">
                   {/* Experience & Education Status Cards */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="p-4 rounded-xl border border-white/10 bg-slate-900/60 flex items-center gap-3">
-                      <div className="bg-cyan-500/10 p-2.5 rounded-lg border border-cyan-500/20">
-                        <Briefcase className="w-5 h-5 text-cyan-400" />
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div className="p-4 rounded-xl border border-[#222222] bg-[#141414] flex items-center gap-3">
+                      <div className="bg-[#1e1e1e] p-2.5 rounded-lg border border-[#2a2a2a] text-[#bbf451]">
+                        <Briefcase className="w-5 h-5" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-xs font-bold text-slate-400 uppercase">Experience Requirement</p>
+                        <p className="text-[10px] font-bold text-[#737373] uppercase">Experience Requirement</p>
                         <div className="flex items-center gap-1.5 mt-0.5">
                           {getStatusIcon(matchData.experience_match)}
-                          <span className="text-sm font-bold text-slate-100 truncate">
+                          <span className="text-xs font-bold text-[#f5f5f5] truncate">
                             {getStatusText(matchData.experience_match, 'experience')}
                           </span>
                         </div>
                       </div>
                     </div>
 
-                    <div className="p-4 rounded-xl border border-white/10 bg-slate-900/60 flex items-center gap-3">
-                      <div className="bg-purple-500/10 p-2.5 rounded-lg border border-purple-500/20">
-                        <GraduationCap className="w-5 h-5 text-purple-400" />
+                    <div className="p-4 rounded-xl border border-[#222222] bg-[#141414] flex items-center gap-3">
+                      <div className="bg-[#1e1e1e] p-2.5 rounded-lg border border-[#2a2a2a] text-[#fb923c]">
+                        <GraduationCap className="w-5 h-5" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-xs font-bold text-slate-400 uppercase">Education Requirement</p>
+                        <p className="text-[10px] font-bold text-[#737373] uppercase">Education Requirement</p>
                         <div className="flex items-center gap-1.5 mt-0.5">
                           {getStatusIcon(matchData.education_match)}
-                          <span className="text-sm font-bold text-slate-100 truncate">
+                          <span className="text-xs font-bold text-[#f5f5f5] truncate">
                             {getStatusText(matchData.education_match, 'education')}
                           </span>
                         </div>
@@ -609,10 +604,10 @@ export default function ResultsPage() {
 
                   {/* Required Skills Section */}
                   <div className="space-y-3 pt-2">
-                    <div className="flex items-center justify-between border-b border-white/10 pb-2">
-                      <h3 className="text-sm font-bold text-slate-200 flex items-center gap-2">
+                    <div className="flex items-center justify-between border-b border-[#222222] pb-2">
+                      <h3 className="text-xs font-bold uppercase tracking-wider text-[#a3a3a3] flex items-center gap-2">
                         <span>Required Skills</span>
-                        <Badge variant="secondary" className="text-[11px] font-bold">
+                        <Badge variant="secondary" className="text-[10px] font-bold bg-[#1a1a1a] text-[#f5f5f5] border-[#2a2a2a]">
                           {skillMatch.matched_required.length} / {skillMatch.matched_required.length + skillMatch.missing_required.length} Matched ({skillMatch.required_match_percentage ?? (skillMatch.matched_required.length > 0 ? Math.round((skillMatch.matched_required.length / (skillMatch.matched_required.length + skillMatch.missing_required.length)) * 100) : 0)}%)
                         </Badge>
                       </h3>
@@ -620,33 +615,33 @@ export default function ResultsPage() {
 
                     <div className="space-y-3">
                       <div>
-                        <span className="text-xs font-bold text-emerald-400 flex items-center gap-1 mb-2">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> Matched Required Skills
+                        <span className="text-xs font-bold text-[#bbf451] flex items-center gap-1.5 mb-2">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-[#bbf451]" /> Matched Required Skills
                         </span>
                         <div className="flex flex-wrap gap-2">
                           {skillMatch.matched_required.length > 0 ? (
                             skillMatch.matched_required.map((s: string) => (
-                              <Badge key={s} variant="success" className="font-semibold text-xs py-1 px-2.5">
+                              <Badge key={s} variant="lime" className="font-semibold text-xs py-1 px-2.5">
                                 ✓ {s}
                               </Badge>
                             ))
                           ) : (
-                            <span className="text-xs text-slate-500 italic">No explicitly required skills matched.</span>
+                            <span className="text-xs text-[#737373] italic">No explicitly required skills matched.</span>
                           )}
                         </div>
                       </div>
 
                       {skillMatch.missing_required.length > 0 && (
-                        <div className="pt-2 bg-amber-500/10 p-3.5 rounded-xl border border-amber-500/30">
-                          <span className="text-xs font-bold text-amber-300 flex items-center gap-1 mb-1.5">
-                            <AlertCircle className="w-3.5 h-3.5 text-amber-400" /> Unmatched Job Requirements ({skillMatch.missing_required.length})
+                        <div className="pt-2 bg-[#16120e] p-3.5 rounded-xl border border-[#fb923c]/20">
+                          <span className="text-xs font-bold text-[#fb923c] flex items-center gap-1.5 mb-1.5">
+                            <AlertCircle className="w-3.5 h-3.5 text-[#fb923c]" /> Unmatched Job Requirements ({skillMatch.missing_required.length})
                           </span>
-                          <p className="text-[11px] text-amber-200/80 mb-2 leading-relaxed">
+                          <p className="text-[11px] text-[#d4d4d4] mb-2 leading-relaxed">
                             These competencies are explicitly requested in the job description. If you possess this experience, consider incorporating them into your resume:
                           </p>
                           <div className="flex flex-wrap gap-2">
                             {skillMatch.missing_required.map((s: string) => (
-                              <Badge key={s} variant="outline" className="font-semibold text-xs py-1 px-2.5 border-amber-500/40 text-amber-300 bg-amber-500/5">
+                              <Badge key={s} variant="orange" className="font-semibold text-xs py-1 px-2.5">
                                 + {s}
                               </Badge>
                             ))}
@@ -658,38 +653,38 @@ export default function ResultsPage() {
 
                   {/* Preferred Skills Section */}
                   <div className="space-y-3 pt-2">
-                    <div className="flex items-center justify-between border-b border-white/10 pb-2">
-                      <h3 className="text-sm font-bold text-slate-200 flex items-center gap-2">
+                    <div className="flex items-center justify-between border-b border-[#222222] pb-2">
+                      <h3 className="text-xs font-bold uppercase tracking-wider text-[#a3a3a3] flex items-center gap-2">
                         <span>Preferred / Nice-to-Have Skills</span>
                       </h3>
                     </div>
 
                     <div className="space-y-3">
                       <div>
-                        <span className="text-xs font-bold text-cyan-400 flex items-center gap-1 mb-2">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400" /> Matched Preferred
+                        <span className="text-xs font-bold text-[#f5f5f5] flex items-center gap-1.5 mb-2">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-[#bbf451]" /> Matched Preferred
                         </span>
                         <div className="flex flex-wrap gap-2">
                           {skillMatch.matched_preferred.length > 0 ? (
                             skillMatch.matched_preferred.map((s: string) => (
-                              <Badge key={s} variant="cyan" className="font-semibold text-xs py-1 px-2.5">
+                              <Badge key={s} variant="outline" className="font-semibold text-xs py-1 px-2.5 border-[#333333] bg-[#1a1a1a] text-[#f5f5f5]">
                                 ✓ {s}
                               </Badge>
                             ))
                           ) : (
-                            <span className="text-xs text-slate-500 italic">None matched.</span>
+                            <span className="text-xs text-[#737373] italic">None matched.</span>
                           )}
                         </div>
                       </div>
 
                       {skillMatch.missing_preferred.length > 0 && (
                         <div className="pt-2">
-                          <span className="text-xs font-bold text-slate-400 flex items-center gap-1 mb-2">
+                          <span className="text-xs font-bold text-[#737373] flex items-center gap-1 mb-2">
                             Missing Preferred
                           </span>
                           <div className="flex flex-wrap gap-2">
                             {skillMatch.missing_preferred.map((s: string) => (
-                              <Badge key={s} variant="secondary" className="font-medium text-xs py-1 px-2.5 text-slate-400">
+                              <Badge key={s} variant="secondary" className="font-medium text-xs py-1 px-2.5 text-[#737373] bg-[#141414] border-[#222222]">
                                 {s}
                               </Badge>
                             ))}
@@ -698,59 +693,59 @@ export default function ResultsPage() {
                       )}
                     </div>
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             </TabsContent>
 
             {/* TAB 2: KEYWORDS */}
             <TabsContent value="keywords">
-              <Card className="border-white/10 shadow-xl bg-[#090d1a]/90 backdrop-blur-2xl">
+              <Card className="border-[#222222] bg-[#111111]">
                 <CardHeader>
                   <div className="flex items-center justify-between">
                     <div>
-                      <CardTitle className="text-xl font-bold text-white">
+                      <CardTitle className="text-xl font-bold tracking-tight text-[#f5f5f5]">
                         Keyword & Terminology Audit
                       </CardTitle>
-                      <CardDescription className="text-xs text-slate-400">
+                      <CardDescription className="text-xs text-[#737373]">
                         Frequency analysis of job-specific keywords throughout your resume text
                       </CardDescription>
                     </div>
-                    <Badge variant="purple" className="text-xs font-bold">
+                    <Badge variant="lime" className="text-xs font-bold font-mono">
                       Keyword Match: {kwMatch.score}%
                     </Badge>
                   </div>
                 </CardHeader>
                 <CardContent className="space-y-6">
                   <div>
-                    <h3 className="text-sm font-bold text-slate-200 mb-3 flex items-center gap-2">
-                      <CheckCircle2 className="h-4 w-4 text-emerald-400" />
+                    <h3 className="text-xs font-bold uppercase tracking-wider text-[#a3a3a3] mb-3 flex items-center gap-2">
+                      <CheckCircle2 className="h-4 w-4 text-[#bbf451]" />
                       Matched Domain Terms ({kwMatch.matched.length})
                     </h3>
                     <div className="flex flex-wrap gap-2">
                       {kwMatch.matched.length > 0 ? (
                         kwMatch.matched.map((kw: string) => (
-                          <div key={kw} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900/80 border border-white/10 text-xs font-semibold text-slate-200 shadow-sm">
+                          <div key={kw} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#141414] border border-[#222222] text-xs font-semibold text-[#f5f5f5]">
                             <span>{kw}</span>
-                            <span className="bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 text-[10px] font-black px-1.5 py-0.2 rounded-md">
+                            <span className="bg-[#bbf451]/10 text-[#bbf451] border border-[#bbf451]/30 text-[10px] font-mono font-bold px-1.5 py-0.5 rounded">
                               {kwMatch.frequencies?.[kw] || 1}x
                             </span>
                           </div>
                         ))
                       ) : (
-                        <span className="text-sm text-slate-500">No domain keywords matched.</span>
+                        <span className="text-xs text-[#737373] italic">No domain keywords matched.</span>
                       )}
                     </div>
                   </div>
 
                   {kwMatch.missing.length > 0 && (
-                    <div className="pt-2 border-t border-white/10">
-                      <h3 className="text-sm font-bold text-slate-200 mb-3 flex items-center gap-2">
-                        <AlertCircle className="h-4 w-4 text-amber-400" />
+                    <div className="pt-4 border-t border-[#222222]">
+                      <h3 className="text-xs font-bold uppercase tracking-wider text-[#a3a3a3] mb-3 flex items-center gap-2">
+                        <AlertCircle className="h-4 w-4 text-[#fb923c]" />
                         Missing Keywords to Consider Adding ({kwMatch.missing.length})
                       </h3>
                       <div className="flex flex-wrap gap-2">
                         {kwMatch.missing.map((kw: string) => (
-                          <Badge key={kw} variant="outline" className="px-3 py-1.5 text-xs text-amber-300 border-amber-500/30 bg-amber-500/10 font-medium">
+                          <Badge key={kw} variant="orange" className="px-3 py-1.5 text-xs font-medium">
                             + {kw}
                           </Badge>
                         ))}
@@ -763,80 +758,80 @@ export default function ResultsPage() {
 
             {/* TAB 3: SEMANTIC RELEVANCE */}
             <TabsContent value="semantic">
-              <Card className="border-white/10 shadow-xl bg-[#090d1a]/90 backdrop-blur-2xl">
+              <Card className="border-[#222222] bg-[#111111]">
                 <CardHeader>
                   <div className="flex items-center justify-between">
                     <div>
-                      <CardTitle className="text-xl font-bold text-white">
+                      <CardTitle className="text-xl font-bold tracking-tight text-[#f5f5f5]">
                         Semantic Relevance (Sentence Embeddings)
                       </CardTitle>
-                      <CardDescription className="text-xs text-slate-400">
+                      <CardDescription className="text-xs text-[#737373]">
                         Calculates deep contextual similarity between your experience descriptions and job requirements
                       </CardDescription>
                     </div>
-                    <Badge variant="cyan" className="text-xs font-bold">
+                    <Badge variant="lime" className="text-xs font-bold font-mono">
                       Relevance: {semMatch?.overall_similarity || 0}%
                     </Badge>
                   </div>
                 </CardHeader>
                 <CardContent className="space-y-6">
                   {semMatch?.status === "unavailable" ? (
-                    <div className="p-4 border border-white/10 rounded-xl bg-slate-900/60 flex items-start gap-3">
-                      <AlertCircle className="h-5 w-5 text-slate-400 mt-0.5" />
-                      <p className="text-sm text-slate-400">Semantic embeddings model is currently warming up or unavailable.</p>
+                    <div className="p-4 border border-[#222222] rounded-xl bg-[#141414] flex items-start gap-3">
+                      <AlertCircle className="h-5 w-5 text-[#737373] mt-0.5" />
+                      <p className="text-xs text-[#737373]">Semantic embeddings model is currently warming up or unavailable.</p>
                     </div>
                   ) : (
                     <div className="space-y-6">
                       {/* Overall Progress Bar */}
-                      <div className="p-5 rounded-2xl bg-gradient-to-r from-slate-900/90 via-cyan-950/30 to-purple-950/30 border border-white/10">
+                      <div className="p-5 rounded-xl bg-[#141414] border border-[#222222]">
                         <div className="flex items-center justify-between mb-2">
-                          <span className="text-sm font-bold text-slate-200">Overall Semantic Alignment</span>
-                          <span className="text-base font-black text-cyan-400">{semMatch?.overall_similarity || 0}%</span>
+                          <span className="text-xs font-bold uppercase tracking-wider text-[#a3a3a3]">Overall Semantic Alignment</span>
+                          <span className="text-base font-bold font-mono text-[#bbf451]">{semMatch?.overall_similarity || 0}%</span>
                         </div>
-                        <div className="w-full bg-slate-950 rounded-full h-3 p-0.5 border border-white/10">
+                        <div className="w-full bg-[#0a0a0a] rounded-full h-2.5 border border-[#222222] overflow-hidden">
                           <div 
-                            className="bg-gradient-to-r from-cyan-500 via-indigo-500 to-purple-500 h-full rounded-full transition-all duration-700 shadow-sm shadow-cyan-500/30"
+                            className="bg-[#bbf451] h-full rounded-full transition-all duration-700"
                             style={{ width: `${semMatch?.overall_similarity || 0}%` }}
                           />
                         </div>
                       </div>
 
                       {/* Section by Section Progress */}
-                      <div className="space-y-4 pt-2">
-                        <div>
-                          <div className="flex justify-between text-xs font-bold text-slate-300 mb-1.5">
-                            <span>Summary & Objective Alignment</span>
-                            <span className="text-cyan-400">{semMatch?.summary_similarity ?? semMatch?.overall_similarity ?? 0}%</span>
+                      <div className="space-y-4 pt-1">
+                        <div className="p-3.5 rounded-lg bg-[#141414] border border-[#222222]">
+                          <div className="flex justify-between text-xs font-bold mb-1.5">
+                            <span className="text-[#a3a3a3]">Summary & Objective Alignment</span>
+                            <span className="text-[#f5f5f5] font-mono">{semMatch?.summary_similarity ?? semMatch?.overall_similarity ?? 0}%</span>
                           </div>
-                          <div className="w-full bg-slate-950 rounded-full h-2.5 border border-white/5">
+                          <div className="w-full bg-[#0a0a0a] rounded-full h-2 border border-[#222222] overflow-hidden">
                             <div 
-                              className="bg-cyan-500 h-2.5 rounded-full transition-all duration-700" 
+                              className="bg-[#f5f5f5] h-full rounded-full transition-all duration-700" 
                               style={{ width: `${semMatch?.summary_similarity ?? semMatch?.overall_similarity ?? 0}%` }} 
                             />
                           </div>
                         </div>
 
-                        <div>
-                          <div className="flex justify-between text-xs font-bold text-slate-300 mb-1.5">
-                            <span>Work Experience Descriptions</span>
-                            <span className="text-emerald-400">{semMatch?.experience_similarity ?? semMatch?.overall_similarity ?? 0}%</span>
+                        <div className="p-3.5 rounded-lg bg-[#141414] border border-[#222222]">
+                          <div className="flex justify-between text-xs font-bold mb-1.5">
+                            <span className="text-[#a3a3a3]">Work Experience Descriptions</span>
+                            <span className="text-[#bbf451] font-mono">{semMatch?.experience_similarity ?? semMatch?.overall_similarity ?? 0}%</span>
                           </div>
-                          <div className="w-full bg-slate-950 rounded-full h-2.5 border border-white/5">
+                          <div className="w-full bg-[#0a0a0a] rounded-full h-2 border border-[#222222] overflow-hidden">
                             <div 
-                              className="bg-emerald-500 h-2.5 rounded-full transition-all duration-700" 
+                              className="bg-[#bbf451] h-full rounded-full transition-all duration-700" 
                               style={{ width: `${semMatch?.experience_similarity ?? semMatch?.overall_similarity ?? 0}%` }} 
                             />
                           </div>
                         </div>
 
-                        <div>
-                          <div className="flex justify-between text-xs font-bold text-slate-300 mb-1.5">
-                            <span>Technical Skill Depth</span>
-                            <span className="text-purple-400">{semMatch?.skills_similarity ?? semMatch?.overall_similarity ?? 0}%</span>
+                        <div className="p-3.5 rounded-lg bg-[#141414] border border-[#222222]">
+                          <div className="flex justify-between text-xs font-bold mb-1.5">
+                            <span className="text-[#a3a3a3]">Technical Skill Depth</span>
+                            <span className="text-[#fb923c] font-mono">{semMatch?.skills_similarity ?? semMatch?.overall_similarity ?? 0}%</span>
                           </div>
-                          <div className="w-full bg-slate-950 rounded-full h-2.5 border border-white/5">
+                          <div className="w-full bg-[#0a0a0a] rounded-full h-2 border border-[#222222] overflow-hidden">
                             <div 
-                              className="bg-purple-500 h-2.5 rounded-full transition-all duration-700" 
+                              className="bg-[#fb923c] h-full rounded-full transition-all duration-700" 
                               style={{ width: `${semMatch?.skills_similarity ?? semMatch?.overall_similarity ?? 0}%` }} 
                             />
                           </div>
@@ -850,15 +845,15 @@ export default function ResultsPage() {
 
             {/* TAB 4: AI INSIGHTS */}
             <TabsContent value="ai">
-              <Card className="border-white/10 shadow-xl bg-[#090d1a]/90 backdrop-blur-2xl">
+              <Card className="border-[#222222] bg-[#111111]">
                 <CardHeader>
                   <div className="flex items-center justify-between">
                     <div>
-                      <CardTitle className="text-xl font-bold text-white flex items-center gap-2">
-                        <Sparkles className="text-cyan-400 h-5 w-5" />
+                      <CardTitle className="text-xl font-bold tracking-tight text-[#f5f5f5] flex items-center gap-2">
+                        <Sparkles className="text-[#bbf451] h-5 w-5" />
                         AI Strategic Insights
                       </CardTitle>
-                      <CardDescription className="text-xs text-slate-400">
+                      <CardDescription className="text-xs text-[#737373]">
                         Qualitative reasoning and hiring manager perspectives generated by Gemini AI
                       </CardDescription>
                     </div>
@@ -866,40 +861,40 @@ export default function ResultsPage() {
                 </CardHeader>
                 <CardContent className="space-y-6">
                   {loadingInsights ? (
-                    <div className="flex flex-col items-center justify-center p-12 text-slate-400 space-y-3">
-                      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-cyan-400" />
-                      <p className="text-sm font-semibold">Generating strategic AI insights...</p>
+                    <div className="flex flex-col items-center justify-center p-12 text-[#737373] space-y-3">
+                      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#bbf451]" />
+                      <p className="text-xs font-semibold uppercase tracking-wider">Generating strategic AI insights...</p>
                     </div>
                   ) : insightError ? (
-                    <div className="p-4 border rounded-xl bg-amber-500/10 border-amber-500/30 flex items-start gap-3">
-                      <AlertCircle className="h-5 w-5 text-amber-400 mt-0.5 shrink-0" />
-                      <p className="text-sm text-amber-200">{insightError}</p>
+                    <div className="p-4 border rounded-xl bg-[#16120e] border-[#fb923c]/30 flex items-start gap-3">
+                      <AlertCircle className="h-5 w-5 text-[#fb923c] mt-0.5 shrink-0" />
+                      <p className="text-xs text-[#d4d4d4]">{insightError}</p>
                     </div>
                   ) : insights ? (
                     <div className="space-y-6">
                       {/* Overall Assessment Banner */}
-                      <div className="flex items-center gap-4 p-4 rounded-2xl bg-gradient-to-r from-slate-900 via-cyan-950/40 to-slate-900 border border-cyan-500/30 shadow-md">
-                        <div className="h-12 w-12 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 text-slate-950 flex items-center justify-center font-black text-xl shrink-0 shadow-lg shadow-cyan-500/20">
+                      <div className="flex items-center gap-4 p-4 rounded-xl bg-[#141414] border border-[#222222]">
+                        <div className="h-12 w-12 rounded-xl bg-[#bbf451] text-black flex items-center justify-center font-black font-mono text-xl shrink-0">
                           {((overallScore || 70) / 10).toFixed(1)}
                         </div>
                         <div>
-                          <p className="text-sm font-bold text-white">{insights.overall_resume_quality || scoreLabel}</p>
-                          <p className="text-xs text-slate-400">AI Qualitative Synthesis</p>
+                          <p className="text-sm font-bold text-[#f5f5f5]">{insights.overall_resume_quality || scoreLabel}</p>
+                          <p className="text-xs text-[#737373]">AI Qualitative Synthesis</p>
                         </div>
                       </div>
 
                       {/* Strengths & Weaknesses 2-Column Grid */}
                       <div className="grid md:grid-cols-2 gap-6">
                         {/* Strengths */}
-                        <div className="p-5 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 space-y-3">
-                          <h3 className="font-bold text-emerald-300 text-sm flex items-center gap-2">
-                            <CheckCircle2 className="h-4 w-4 text-emerald-400" />
+                        <div className="p-5 rounded-xl border border-[#bbf451]/20 bg-[#12160f] space-y-3">
+                          <h3 className="font-bold text-[#bbf451] text-xs uppercase tracking-wider flex items-center gap-2">
+                            <CheckCircle2 className="h-4 w-4 text-[#bbf451]" />
                             Key Strengths
                           </h3>
-                          <ul className="space-y-2 text-xs text-slate-300 leading-relaxed">
+                          <ul className="space-y-2 text-xs text-[#d4d4d4] leading-relaxed">
                             {insights.strengths?.map((s: string, i: number) => (
                               <li key={i} className="flex items-start gap-2">
-                                <span className="text-emerald-400 font-bold">✓</span>
+                                <span className="text-[#bbf451] font-bold">✓</span>
                                 <span>{s}</span>
                               </li>
                             ))}
@@ -907,15 +902,15 @@ export default function ResultsPage() {
                         </div>
 
                         {/* Weaknesses */}
-                        <div className="p-5 rounded-2xl border border-amber-500/30 bg-amber-500/10 space-y-3">
-                          <h3 className="font-bold text-amber-300 text-sm flex items-center gap-2">
-                            <AlertCircle className="h-4 w-4 text-amber-400" />
+                        <div className="p-5 rounded-xl border border-[#fb923c]/20 bg-[#16120e] space-y-3">
+                          <h3 className="font-bold text-[#fb923c] text-xs uppercase tracking-wider flex items-center gap-2">
+                            <AlertCircle className="h-4 w-4 text-[#fb923c]" />
                             Areas for Improvement
                           </h3>
-                          <ul className="space-y-2 text-xs text-slate-300 leading-relaxed">
+                          <ul className="space-y-2 text-xs text-[#d4d4d4] leading-relaxed">
                             {insights.weaknesses?.map((w: string, i: number) => (
                               <li key={i} className="flex items-start gap-2">
-                                <span className="text-amber-400 font-bold">⚠</span>
+                                <span className="text-[#fb923c] font-bold">⚠</span>
                                 <span>{w}</span>
                               </li>
                             ))}
@@ -924,15 +919,15 @@ export default function ResultsPage() {
                       </div>
 
                       {/* Actionable Recommendations */}
-                      <div className="p-5 rounded-2xl border border-white/10 bg-slate-900/60 space-y-3 shadow-sm">
-                        <h3 className="font-bold text-cyan-300 text-sm flex items-center gap-2">
-                          <Sparkles className="h-4 w-4 text-cyan-400" />
+                      <div className="p-5 rounded-xl border border-[#222222] bg-[#141414] space-y-3">
+                        <h3 className="font-bold text-[#f5f5f5] text-xs uppercase tracking-wider flex items-center gap-2">
+                          <Sparkles className="h-4 w-4 text-[#bbf451]" />
                           Actionable Next Steps
                         </h3>
                         <div className="space-y-2.5">
                           {insights.recommendations?.map((r: string, i: number) => (
-                            <div key={i} className="flex items-start gap-3 p-3 rounded-xl bg-slate-950/80 border border-white/5 text-xs text-slate-300">
-                              <span className="h-5 w-5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 flex items-center justify-center font-bold text-[10px] shrink-0">
+                            <div key={i} className="flex items-start gap-3 p-3 rounded-lg bg-[#0d0d0d] border border-[#222222] text-xs text-[#d4d4d4]">
+                              <span className="h-5 w-5 rounded bg-[#1a1a1a] text-[#f5f5f5] border border-[#2a2a2a] flex items-center justify-center font-mono font-bold text-[10px] shrink-0">
                                 {i + 1}
                               </span>
                               <span className="leading-relaxed">{r}</span>
@@ -948,24 +943,24 @@ export default function ResultsPage() {
 
             {/* TAB 5: BULLET REWRITER */}
             <TabsContent value="rewrite">
-              <Card className="border-white/10 shadow-xl bg-[#090d1a]/90 backdrop-blur-2xl">
+              <Card className="border-[#222222] bg-[#111111]">
                 <CardHeader>
-                  <CardTitle className="text-xl font-bold text-white flex items-center gap-2">
-                    <Wand2 className="text-purple-400 h-5 w-5" />
+                  <CardTitle className="text-xl font-bold tracking-tight text-[#f5f5f5] flex items-center gap-2">
+                    <Wand2 className="text-[#bbf451] h-5 w-5" />
                     AI Resume Bullet Optimizer
                   </CardTitle>
-                  <CardDescription className="text-xs text-slate-400">
+                  <CardDescription className="text-xs text-[#737373]">
                     Transform weak or passive bullet points into high-impact, quantified statements while preserving factual truth.
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
                   {/* Interactive Bullet Input Box */}
-                  <div className="space-y-3 bg-slate-900/60 p-5 rounded-2xl border border-white/10">
-                    <label className="text-xs font-bold text-slate-300 uppercase tracking-wider block">
+                  <div className="space-y-3 bg-[#141414] p-5 rounded-xl border border-[#222222]">
+                    <label className="text-xs font-bold text-[#a3a3a3] uppercase tracking-wider block">
                       Enter a Resume Bullet Point to Improve:
                     </label>
                     <textarea 
-                      className="w-full min-h-[90px] p-3.5 border border-white/10 rounded-xl bg-slate-950 text-sm text-slate-100 focus:outline-none focus:ring-4 focus:ring-cyan-500/15 focus:border-cyan-500 transition-all leading-relaxed shadow-inner"
+                      className="w-full min-h-[90px] p-3.5 border border-[#262626] rounded-lg bg-[#0a0a0a] text-sm text-[#f5f5f5] placeholder:text-[#525252] focus:outline-none focus:border-[#bbf451] focus:ring-1 focus:ring-[#bbf451]/20 transition-all leading-relaxed"
                       placeholder="e.g., Built web application using React and handled API endpoints."
                       value={rewriteInput}
                       onChange={(e) => setRewriteInput(e.target.value)}
@@ -975,16 +970,17 @@ export default function ResultsPage() {
                       <Button 
                         onClick={handleRewrite} 
                         disabled={rewriteLoading || rewriteInput.trim().length < 5}
-                        className="font-bold shadow-lg shadow-cyan-500/20"
+                        variant="default"
+                        className="font-bold"
                       >
                         {rewriteLoading ? (
                           <>
-                            <Wand2 className="mr-2 h-4 w-4 animate-spin text-cyan-300" />
+                            <Wand2 className="mr-2 h-4 w-4 animate-spin" />
                             Optimizing Bullet...
                           </>
                         ) : (
                           <>
-                            <Wand2 className="mr-2 h-4 w-4 text-cyan-200" />
+                            <Wand2 className="mr-2 h-4 w-4" />
                             Improve Bullet Point
                           </>
                         )}
@@ -993,7 +989,7 @@ export default function ResultsPage() {
                   </div>
                   
                   {rewriteError && (
-                    <div className="p-4 border rounded-xl bg-rose-500/10 border-rose-500/30 text-rose-300 text-xs font-medium flex items-center gap-2">
+                    <div className="p-4 border rounded-xl bg-[#16120e] border-[#fb923c]/30 text-[#fb923c] text-xs font-medium flex items-center gap-2">
                       <AlertCircle className="h-4 w-4 shrink-0" />
                       <p>{rewriteError}</p>
                     </div>
@@ -1001,79 +997,79 @@ export default function ResultsPage() {
                   
                   {rewriteResult && (
                     <div className="space-y-4 pt-2">
-                      <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider">
+                      <h4 className="text-xs font-bold text-[#737373] uppercase tracking-wider">
                         Tailored High-Impact Variations:
                       </h4>
 
-                      <div className="grid gap-4">
+                      <div className="grid gap-3">
                         {/* Variation 1: Concise */}
-                        <div className="p-4 rounded-xl border border-cyan-500/30 bg-cyan-500/10 relative group shadow-sm hover:border-cyan-500/50 transition-all">
-                          <div className="flex items-center justify-between mb-1.5">
-                            <span className="text-[11px] font-bold text-cyan-300 uppercase tracking-wider">
+                        <div className="p-4 rounded-xl border border-[#222222] bg-[#141414] relative group transition-all">
+                          <div className="flex items-center justify-between mb-2">
+                            <span className="text-[10px] font-bold text-[#f5f5f5] bg-[#222222] px-2 py-0.5 rounded uppercase tracking-wider">
                               ⚡ Concise & Direct
                             </span>
                             <Button 
                               variant="outline" 
                               size="sm" 
-                              className="h-7 px-2.5 text-xs font-semibold rounded-lg"
+                              className="h-7 px-2.5 text-xs font-semibold rounded-md border-[#2a2a2a] text-[#a3a3a3] hover:text-white"
                               onClick={() => handleCopy(rewriteResult.concise, 'concise')}
                             >
                               {copiedField === 'concise' ? (
-                                <span className="flex items-center gap-1 text-emerald-400 font-bold"><Check className="h-3.5 w-3.5" /> Copied</span>
+                                <span className="flex items-center gap-1 text-[#bbf451] font-bold"><Check className="h-3.5 w-3.5" /> Copied</span>
                               ) : (
-                                <span className="flex items-center gap-1 text-slate-300"><Copy className="h-3.5 w-3.5" /> Copy</span>
+                                <span className="flex items-center gap-1"><Copy className="h-3.5 w-3.5" /> Copy</span>
                               )}
                             </Button>
                           </div>
-                          <p className="text-slate-200 text-xs sm:text-sm font-medium pr-12 leading-relaxed">
+                          <p className="text-[#d4d4d4] text-xs sm:text-sm font-medium leading-relaxed">
                             {rewriteResult.concise}
                           </p>
                         </div>
 
                         {/* Variation 2: Technical */}
-                        <div className="p-4 rounded-xl border border-purple-500/30 bg-purple-500/10 relative group shadow-sm hover:border-purple-500/50 transition-all">
-                          <div className="flex items-center justify-between mb-1.5">
-                            <span className="text-[11px] font-bold text-purple-300 uppercase tracking-wider">
+                        <div className="p-4 rounded-xl border border-[#222222] bg-[#141414] relative group transition-all">
+                          <div className="flex items-center justify-between mb-2">
+                            <span className="text-[10px] font-bold text-[#bbf451] bg-[#12160f] border border-[#bbf451]/20 px-2 py-0.5 rounded uppercase tracking-wider">
                               🛠 Technical & Architectural
                             </span>
                             <Button 
                               variant="outline" 
                               size="sm" 
-                              className="h-7 px-2.5 text-xs font-semibold rounded-lg"
+                              className="h-7 px-2.5 text-xs font-semibold rounded-md border-[#2a2a2a] text-[#a3a3a3] hover:text-white"
                               onClick={() => handleCopy(rewriteResult.technical, 'technical')}
                             >
                               {copiedField === 'technical' ? (
-                                <span className="flex items-center gap-1 text-emerald-400 font-bold"><Check className="h-3.5 w-3.5" /> Copied</span>
+                                <span className="flex items-center gap-1 text-[#bbf451] font-bold"><Check className="h-3.5 w-3.5" /> Copied</span>
                               ) : (
-                                <span className="flex items-center gap-1 text-slate-300"><Copy className="h-3.5 w-3.5" /> Copy</span>
+                                <span className="flex items-center gap-1"><Copy className="h-3.5 w-3.5" /> Copy</span>
                               )}
                             </Button>
                           </div>
-                          <p className="text-slate-200 text-xs sm:text-sm font-medium pr-12 leading-relaxed">
+                          <p className="text-[#d4d4d4] text-xs sm:text-sm font-medium leading-relaxed">
                             {rewriteResult.technical}
                           </p>
                         </div>
 
                         {/* Variation 3: Achievement-Focused */}
-                        <div className="p-4 rounded-xl border border-emerald-500/30 bg-emerald-500/10 relative group shadow-sm hover:border-emerald-500/50 transition-all">
-                          <div className="flex items-center justify-between mb-1.5">
-                            <span className="text-[11px] font-bold text-emerald-300 uppercase tracking-wider">
+                        <div className="p-4 rounded-xl border border-[#222222] bg-[#141414] relative group transition-all">
+                          <div className="flex items-center justify-between mb-2">
+                            <span className="text-[10px] font-bold text-[#fb923c] bg-[#16120e] border border-[#fb923c]/20 px-2 py-0.5 rounded uppercase tracking-wider">
                               🏆 Achievement & Impact Oriented
                             </span>
                             <Button 
                               variant="outline" 
                               size="sm" 
-                              className="h-7 px-2.5 text-xs font-semibold rounded-lg"
+                              className="h-7 px-2.5 text-xs font-semibold rounded-md border-[#2a2a2a] text-[#a3a3a3] hover:text-white"
                               onClick={() => handleCopy(rewriteResult.achievement_focused, 'achievement')}
                             >
                               {copiedField === 'achievement' ? (
-                                <span className="flex items-center gap-1 text-emerald-400 font-bold"><Check className="h-3.5 w-3.5" /> Copied</span>
+                                <span className="flex items-center gap-1 text-[#bbf451] font-bold"><Check className="h-3.5 w-3.5" /> Copied</span>
                               ) : (
-                                <span className="flex items-center gap-1 text-slate-300"><Copy className="h-3.5 w-3.5" /> Copy</span>
+                                <span className="flex items-center gap-1"><Copy className="h-3.5 w-3.5" /> Copy</span>
                               )}
                             </Button>
                           </div>
-                          <p className="text-slate-200 text-xs sm:text-sm font-medium pr-12 leading-relaxed">
+                          <p className="text-[#d4d4d4] text-xs sm:text-sm font-medium leading-relaxed">
                             {rewriteResult.achievement_focused}
                           </p>
                         </div>
@@ -1086,26 +1082,26 @@ export default function ResultsPage() {
 
             {/* TAB 6: INTERVIEW PREPARATION */}
             <TabsContent value="interview">
-              <Card className="border-white/10 shadow-xl bg-[#090d1a]/90 backdrop-blur-2xl">
+              <Card className="border-[#222222] bg-[#111111]">
                 <CardHeader>
-                  <CardTitle className="text-xl font-bold text-white flex items-center gap-2">
-                    <MessagesSquare className="text-cyan-400 h-5 w-5" />
+                  <CardTitle className="text-xl font-bold tracking-tight text-[#f5f5f5] flex items-center gap-2">
+                    <MessagesSquare className="text-[#bbf451] h-5 w-5" />
                     Personalized Interview Preparation
                   </CardTitle>
-                  <CardDescription className="text-xs text-slate-400">
+                  <CardDescription className="text-xs text-[#737373]">
                     Targeted practice questions derived from the intersections of your background and the job requirements
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
                   {loadingInterview ? (
-                    <div className="flex flex-col items-center justify-center p-12 text-slate-400 space-y-3">
-                      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-cyan-400" />
-                      <p className="text-sm font-semibold">Synthesizing interview questions...</p>
+                    <div className="flex flex-col items-center justify-center p-12 text-[#737373] space-y-3">
+                      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#bbf451]" />
+                      <p className="text-xs font-semibold uppercase tracking-wider">Synthesizing interview questions...</p>
                     </div>
                   ) : interviewError ? (
-                    <div className="p-4 border rounded-xl bg-amber-500/10 border-amber-500/30 flex items-start gap-3">
-                      <AlertCircle className="h-5 w-5 text-amber-400 mt-0.5 shrink-0" />
-                      <p className="text-sm text-amber-200">{interviewError}</p>
+                    <div className="p-4 border rounded-xl bg-[#16120e] border-[#fb923c]/30 flex items-start gap-3">
+                      <AlertCircle className="h-5 w-5 text-[#fb923c] mt-0.5 shrink-0" />
+                      <p className="text-xs text-[#d4d4d4]">{interviewError}</p>
                     </div>
                   ) : interviewQuestions ? (
                     <div className="space-y-8">
@@ -1122,44 +1118,44 @@ export default function ResultsPage() {
 
                         return (
                           <div key={category} className="space-y-3">
-                            <h3 className="font-bold text-white text-sm sm:text-base border-b border-white/10 pb-2">
+                            <h3 className="font-bold text-[#f5f5f5] text-sm uppercase tracking-wider border-b border-[#222222] pb-2">
                               {titleMap[category]}
                             </h3>
                             <div className="space-y-3">
                               {questions.map((q: any, i: number) => (
-                                <div key={i} className="p-4 rounded-xl border border-white/10 bg-slate-900/70 shadow-sm hover:border-cyan-500/30 transition-all">
+                                <div key={i} className="p-4 rounded-xl border border-[#222222] bg-[#141414] transition-all">
                                   <div className="flex justify-between items-start mb-2 gap-2">
                                     <div className="flex items-center gap-2 flex-wrap">
                                       <Badge variant={
-                                        q.difficulty === "Easy" ? "success" :
-                                        q.difficulty === "Medium" ? "warning" : "destructive"
-                                      } className="text-[10px] font-bold py-0.5">
+                                        q.difficulty === "Easy" ? "lime" :
+                                        q.difficulty === "Medium" ? "orange" : "destructive"
+                                      } className="text-[10px] font-bold font-mono py-0.5">
                                         {q.difficulty}
                                       </Badge>
-                                      <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wide">
+                                      <span className="text-[11px] font-mono text-[#737373] uppercase tracking-wide">
                                         {q.topic}
                                       </span>
                                     </div>
                                     <Button 
                                       variant="ghost" 
                                       size="sm" 
-                                      className="h-7 px-2 text-slate-400 hover:text-cyan-400 rounded-lg"
+                                      className="h-7 px-2 text-[#737373] hover:text-white rounded-md"
                                       onClick={() => handleCopy(q.question, `q-${category}-${i}`)}
                                     >
                                       {copiedField === `q-${category}-${i}` ? (
-                                        <Check className="h-3.5 w-3.5 text-emerald-400" />
+                                        <Check className="h-3.5 w-3.5 text-[#bbf451]" />
                                       ) : (
                                         <Copy className="h-3.5 w-3.5" />
                                       )}
                                     </Button>
                                   </div>
-                                  <p className="text-slate-100 font-semibold text-xs sm:text-sm mb-2.5 leading-relaxed">
+                                  <p className="text-[#f5f5f5] font-medium text-xs sm:text-sm mb-2.5 leading-relaxed">
                                     {q.question}
                                   </p>
                                   {q.why_it_matters && (
-                                    <div className="bg-slate-950/80 p-2.5 rounded-lg text-xs text-slate-300 border border-white/5 flex items-start gap-1.5">
-                                      <span className="font-bold text-cyan-400 shrink-0">Hiring Intent:</span>
-                                      <span className="text-slate-400 leading-relaxed">{q.why_it_matters}</span>
+                                    <div className="bg-[#0a0a0a] p-2.5 rounded-lg text-xs text-[#a3a3a3] border border-[#222222] flex items-start gap-1.5">
+                                      <span className="font-bold text-[#bbf451] shrink-0">Hiring Intent:</span>
+                                      <span className="leading-relaxed">{q.why_it_matters}</span>
                                     </div>
                                   )}
                                 </div>
